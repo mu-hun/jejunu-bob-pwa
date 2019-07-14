@@ -2,6 +2,7 @@
   <v-app>
     <v-toolbar app>
       <v-toolbar-title class="center">{{ week }}</v-toolbar-title>
+	  <open-source-license/>
     </v-toolbar>
     <v-content>
       <v-expansion-panel v-if="isWeekday" v-model="panel" expand>
