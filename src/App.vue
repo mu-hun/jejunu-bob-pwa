@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { request } from './api.js'
+import request from './api.js'
 import License from './components/License'
 import Panel from './components/Panel'
 import BottomNav from './components/BottomNav'

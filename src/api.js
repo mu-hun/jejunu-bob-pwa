@@ -1,9 +1,11 @@
 import { get } from 'axios'
 
-const DOMAIN = 'https://meals-data.muhun.kim'
-
-export const request = () => {
-    return get(DOMAIN)
+export default function() {
+    return get(
+        process.env.NODE_ENV === 'development'
+            ? 'https://meals-data.muhun.kim/dev'
+            : 'https://meals-data.muhun.kim'
+    )
         .then(res => res.data)
         .catch(res => {
             throw res
