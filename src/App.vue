@@ -67,12 +67,6 @@ export default {
         time(newV) {
             this.panel = this.timeKey[newV]
         }
-    },
-    filters: {
-        join: arr => arr.join(' ').replace(/\(.+\)/, '')
-    },
-    methods: {
-        calcEnd: obj => Object.keys(obj).length - 1
     }
 }
 </script>
