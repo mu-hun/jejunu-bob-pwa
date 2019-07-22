@@ -32,7 +32,7 @@
 <script>
 
 export default {
-	name: 'OpenSourceLicense',
+	name: 'License',
 	computed: {
 		getList() {
 			return [
