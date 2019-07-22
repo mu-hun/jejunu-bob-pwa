@@ -41,7 +41,7 @@ workbox.routing.registerRoute(
 )
 
 workbox.routing.registerRoute(
-	'https://meals-data.muhun.kim',
+	'https://meals-data.muhun.kim/',
 	workbox.strategies.networkFirst({
 		cacheName: 'api'
 	})
