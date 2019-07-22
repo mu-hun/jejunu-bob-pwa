@@ -2,53 +2,34 @@
   <v-app>
     <v-toolbar app>
       <v-toolbar-title class="center">{{ week }}</v-toolbar-title>
-      <open-source-license />
     </v-toolbar>
     <v-content>
-      <v-expansion-panel v-if="isWeekday" v-model="panel" expand>
-        <v-expansion-panel-content v-for="(value, time) in today" :key="time">
-          <template v-slot:header>
-            <div v-text="time" />
-          </template>
-          <v-card>
-            <v-list>
-              <v-list-tile v-for="(menus, type, index) in value" :key="`${type}_list-tile`">
-                <v-list-tile-content>
-                  <v-list-tile-title>{{menus | join}}</v-list-tile-title>
-                  <v-list-tile-sub-title v-text="type" />
-                </v-list-tile-content>
-              </v-list-tile>
-              <v-divider v-if="index < calcEnd(value)" :key="`${type}_divider`" />
-            </v-list>
-          </v-card>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
+      <panel v-if="isWeekday" :panel="panel" :list="today_meal" />
       <div v-else class="weekend">
-        <v-icon color="black darken-2" x-large>weekend</v-icon>주말
+        <NpVacation />주말
       </div>
     </v-content>
-    <v-bottom-nav :active.sync="time" :value="true" absolute color="transparent">
-      <v-btn color="teal" flat value="점심">
-        <span>점심</span>
-        <v-icon>fastfood</v-icon>
-      </v-btn>
-
-      <v-btn color="teal" flat value="저녁">
-        <span>저녁</span>
-        <v-icon>restaurant</v-icon>
-      </v-btn>
-    </v-bottom-nav>
+    <div class="license">
+      <license />
+    </div>
+    <bottom-nav :time.sync="time" />
   </v-app>
 </template>
 
 <script>
 import { request } from './api.js'
-import OpenSourceLicense from './components/OpenSourceLicense'
+import License from './components/License'
+import Panel from './components/Panel'
+import BottomNav from './components/BottomNav'
+import NpVacation from './SVG/npVacation.svg'
 
 export default {
     name: 'App',
     components: {
-        OpenSourceLicense
+        License,
+        Panel,
+        BottomNav,
+        NpVacation
     },
     data: () => ({
         isWeekday: true,
@@ -62,11 +43,11 @@ export default {
             6: '토요일'
         },
         week: '월요일',
-        time: '',
+        time: '점심',
         timeKey: { 점심: [true, false], 저녁: [false, true] },
         panel: [true, false],
-        total: {},
-        today: {}
+        // weekly_meal: {}, //TODO
+        today_meal: {}
     }),
     created() {
         const date = new Date()
@@ -78,9 +59,8 @@ export default {
         }
         this.time = date.getHours() < 15 ? '점심' : '저녁'
         request().then(data => {
-            this.total = data
-            this.isWeekday = true
-            this.today = this.total[weekday - 1]
+            // this.weekly_meals = data
+            this.today_meal = data[weekday - 1]
         })
     },
     watch: {
@@ -105,17 +85,18 @@ export default {
 .weekend {
     display: flex;
     flex-direction: column;
+	justify-content: center;
+    align-items: center;
+	font-size: x-large;
+    height: 100%;
+	width: 100%;
+}
+
+.license {
+    display: flex;
+    min-width: 100vw;
     justify-content: center;
-    text-align: center;
-    height: 200px;
+	margin-bottom: 28px;
 }
-
-.weekend i {
-    font-size: 120px !important;
-}
-
-/* .v-bottom-nav {
-    justify-content: space-between;
-} */
 </style>
 
