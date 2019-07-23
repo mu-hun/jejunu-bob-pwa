@@ -22,7 +22,8 @@ const fileToCache = [
     'img/icons/favicon-32x32.png',
     'img/icons/favicon-16x16.png',
     'img/icons/msapplication-icon-144x144.png',
-    'img/icons/mstile-150x150.png'
+	'img/icons/mstile-150x150.png',
+	'favicon.ico'
 ]
 
 self.addEventListener('install', evt => {
@@ -33,32 +34,22 @@ self.addEventListener('install', evt => {
             .then(cache => cache.addAll(fileToCache))
             .catch(evt => console.log(evt))
     )
+    evt.waitUntil(
+        caches
+            .open(CACHE_API)
+            .then(cache => cache.addAll([API_URL]))
+            .catch(evt => console.log(evt))
+    )
 })
 
 self.addEventListener('fetch', evt => {
-    const { request: req } = evt
-    console.log('[sw.js]', req)
-    if (req.url === API_URL) {
-        evt.respondWith(
-            caches.open(CACHE_API).then(cache =>
-                cache.match(req).then(
-                    res =>
-                        res ||
-                        fetch(req).then(res => {
-                            cache.put(req, res.clone())
-                            return res
-                        })
-                )
-            )
-        )
-    } else {
-        evt.respondWith(
-            caches
-                .match(evt.request)
-                .then(res => res || fetch(evt.request))
-                .catch(err => console.log(err))
-        )
-    }
+    console.log('[sw.js]', evt.request)
+    evt.respondWith(
+        caches
+            .match(evt.request)
+            .then(res => res || fetch(evt.request))
+            .catch(err => console.log(err))
+    )
 })
 
 self.addEventListener('activate', evt => {
