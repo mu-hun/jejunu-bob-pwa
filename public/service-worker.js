@@ -62,7 +62,7 @@ self.addEventListener('fetch', evt => {
 })
 
 self.addEventListener('activate', evt => {
-    const cacheWhitelist = ['alpha_v1', CACHE_API]
+    const cacheWhitelist = [CACHE_NAME, CACHE_API]
     evt.waitUntil(
         caches.keys().then(names =>
             Promise.all(
