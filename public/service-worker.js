@@ -4,7 +4,7 @@ const CACHE_NAME = 'cache_v1'
 // TODO: dynamic icon cache by regex
 // const ICON_NAME = 'icon_v1'
 
-const API_URL = 'https://meals-data.muhun.kim/dev'
+const API_URL = 'https://meals-data.muhun.kim'
 
 const fileToCache = [
     '/',
