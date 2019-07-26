@@ -1,4 +1,8 @@
-const CACHE_API = `api_${Math.floor(new Date().getDate() / 7)}`
+const CACHE_API = `api_${(() => {
+    const DATE = new Date()
+    const weekday = Math.floor(DATE.getDate() / 7)
+    return weekday === 1 && DATE.getHours() < 10 ? weekday - 1 : weekday
+})()}`
 const CACHE_NAME = 'cache_v1'
 
 // TODO: dynamic icon cache by regex
@@ -22,8 +26,8 @@ const fileToCache = [
     'img/icons/favicon-32x32.png',
     'img/icons/favicon-16x16.png',
     'img/icons/msapplication-icon-144x144.png',
-	'img/icons/mstile-150x150.png',
-	'favicon.ico'
+    'img/icons/mstile-150x150.png',
+    'favicon.ico'
 ]
 
 self.addEventListener('install', evt => {
