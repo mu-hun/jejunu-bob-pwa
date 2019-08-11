@@ -1,35 +1,36 @@
 <template>
-  <v-expansion-panel :value="flag" expand>
-    <v-expansion-panel-content v-for="(value, time) in list" :key="time">
-      <template v-slot:header>
-        <div v-text="time" />
-      </template>
-      <v-card>
-        <v-list>
-          <v-list-tile v-for="(menus, type) in value" :key="`${type}_list-tile`">
-            <v-list-tile-content>
-              <v-list-tile-title>{{menus | join}}</v-list-tile-title>
-              <v-list-tile-sub-title v-text="type" />
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list>
-      </v-card>
-    </v-expansion-panel-content>
-  </v-expansion-panel>
+    <div>
+        <!-- TOOD: expand action by flag -->
+        <!-- <expansion-panel :value="flag" expand> -->
+        <div v-for="(value, time) in list" :key="time">
+            <div v-text="time" />
+            <!-- <card> -->
+            <!-- <list> -->
+            <ul v-for="(menus, type) in value" :key="`${type}_list-tile`">
+                <!-- <list-tile-content> -->
+                <li>{{type}}: {{menus | join}}</li>
+                <!-- <list-tile-sub-title v-text="type" /> -->
+                <!-- </list-tile-content> -->
+            </ul>
+            <!-- </list> -->
+            <!-- </card> -->
+        </div>
+        <!-- </expansion-panel> -->
+    </div>
 </template>
 
 <script>
 export default {
-	name: 'Panel',
-	props: ['panel', 'list'],
-	computed: {
-		flag(newV) {
-			return this.panel
-		}
-	},
-	filters: {
+    name: 'Panel',
+    props: ['panel', 'list'],
+    computed: {
+        flag(newV) {
+            return this.panel
+        }
+    },
+    filters: {
         join: arr => arr.join(' ').replace(/\(.+\)/, '')
-	}
+    }
 }
 </script>
 

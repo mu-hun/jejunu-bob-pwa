@@ -1,34 +1,31 @@
 <template>
-  <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="center">{{ week }}</v-toolbar-title>
-    </v-toolbar>
-    <v-content>
-      <panel v-if="isWeekday" :panel="panel" :list="today_meal" />
-      <div v-else class="weekend">
-        <NpVacation />주말
-      </div>
-    </v-content>
-    <div class="license">
+    <div>
+        <header class="center">{{ week }}</header>
+        <!-- TODO -->
+        <panel v-if="isWeekday" :list="today_meal" />
+        <div v-else class="weekend">
+            <NpVacation />주말
+        </div>
+        <!-- <div class="license">
       <license />
+        </div>-->
+        <!-- <bottom-nav :time.sync="time" /> -->
     </div>
-    <bottom-nav :time.sync="time" />
-  </v-app>
 </template>
 
 <script>
 import request from './api.js'
-import License from './components/License'
+// import License from './components/License'
 import Panel from './components/Panel'
-import BottomNav from './components/BottomNav'
+// import BottomNav from './components/BottomNav'
 import NpVacation from './SVG/npVacation.svg'
 
 export default {
     name: 'App',
     components: {
-        License,
+        // License,
         Panel,
-        BottomNav,
+        // BottomNav,
         NpVacation
     },
     data: () => ({
@@ -79,18 +76,18 @@ export default {
 .weekend {
     display: flex;
     flex-direction: column;
-	justify-content: center;
+    justify-content: center;
     align-items: center;
-	font-size: x-large;
+    font-size: x-large;
     height: 100%;
-	width: 100%;
+    width: 100%;
 }
 
 .license {
     display: flex;
     min-width: 100vw;
     justify-content: center;
-	margin-bottom: 28px;
+    margin-bottom: 28px;
 }
 </style>
 
