@@ -1,8 +1,9 @@
-const CACHE_API = `api_${(() => {
-    const DATE = new Date()
-    const weekday = Math.floor(DATE.getDate() / 7)
-    return weekday === 1 && DATE.getHours() < 10 ? weekday - 1 : weekday
-})()}`
+const CACHE_API = () =>
+    `api_${(() => {
+        const DATE = new Date()
+        const weekday = Math.floor(DATE.getDate() / 7)
+        return weekday === 1 && DATE.getHours() < 10 ? weekday - 1 : weekday
+    })()}`
 const CACHE_NAME = 'cache_v1'
 
 // TODO: dynamic icon cache by regex
@@ -40,7 +41,7 @@ self.addEventListener('install', evt => {
     )
     evt.waitUntil(
         caches
-            .open(CACHE_API)
+            .open(CACHE_API())
             .then(cache => cache.addAll([API_URL]))
             .catch(evt => console.log(evt))
     )
@@ -57,7 +58,7 @@ self.addEventListener('fetch', evt => {
 })
 
 self.addEventListener('activate', evt => {
-    const cacheWhitelist = [CACHE_NAME, CACHE_API]
+    const cacheWhitelist = [CACHE_NAME, CACHE_API()]
     evt.waitUntil(
         caches.keys().then(names =>
             Promise.all(
