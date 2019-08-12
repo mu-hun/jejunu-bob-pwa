@@ -1,28 +1,39 @@
 {
-  "name": "jejunu-bob-pwa",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve --mode development",
-    "build": "vue-cli-service build",
-    "build:dev": "vue-cli-service build --mode development"
-  },
-  "dependencies": {
-    "axios": "^0.19.0",
-    "vue": "^2.6.10"
-  },
-  "devDependencies": {
-    "@vue/cli-service": "^3.9.0",
-    "eslint": "^6.0.1",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-vue": "^5.2.3",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.1",
-    "vue-svg-loader": "^0.12.0",
-    "vue-template-compiler": "^2.6.10"
-  }
+    "name": "jejunu-bob-pwa",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "serve": "MODE=development webpack-dev-server --open",
+        "build:prod": "MODE=production webpack",
+        "build:dev": "MODE=development webpack"
+    },
+    "dependencies": {
+        "axios": "^0.19.0",
+        "babel-core": "^6.26.3",
+        "babel-loader": "7",
+        "babel-preset-env": "^1.7.0",
+        "css-loader": "^3.2.0",
+        "mini-css-extract-plugin": "^0.8.0",
+        "node-sass": "^4.12.0",
+        "postcss-loader": "^3.0.0",
+        "sass-loader": "^7.2.0",
+        "vue": "^2.6.10",
+        "vue-loader": "^15.7.1",
+        "vue-svg-loader": "^0.12.0",
+        "vue-template-compiler": "^2.6.10",
+        "webpack": "^4.39.1"
+    },
+    "devDependencies": {
+        "autoprefixer": "^9.6.1",
+        "clean-webpack-plugin": "^3.0.0",
+        "eslint": "^6.0.1",
+        "eslint-config-prettier": "^6.0.0",
+        "eslint-config-standard": "^12.0.0",
+        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-prettier": "^3.1.0",
+        "eslint-plugin-standard": "^4.0.0",
+        "eslint-plugin-vue": "^5.2.3",
+        "webpack-cli": "^3.3.6",
+        "webpack-dev-server": "^3.8.0"
+    }
 }

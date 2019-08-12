@@ -4,18 +4,22 @@ const CACHE_API = () =>
         const weekday = Math.floor(DATE.getDate() / 7)
         return weekday === 1 && DATE.getHours() < 10 ? weekday - 1 : weekday
     })()}`
-const CACHE_NAME = 'cache_v1'
+const CACHE_NAME = 'cache_v2'
 
 // TODO: dynamic icon cache by regex
 // const ICON_NAME = 'icon_v1'
 
-const API_URL = 'https://meals-data.muhun.kim'
+const API_URL =
+    location.hostname === 'meals.muhun.dev'
+        ? 'https://meals-data.muhun.kim'
+        : 'https://meals-data.muhun.kim/dev'
 
 const fileToCache = [
     '/',
     'manifest.json',
     'https://fonts.googleapis.com/css?family=Material+Icons',
-    'app.js',
+    'main.js',
+    'main.css',
     'https://fonts.gstatic.com/s/materialicons/v47/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2',
     'img/icons/android-chrome-192x192.png',
     'img/icons/android-chrome-512x512.png',

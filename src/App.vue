@@ -16,7 +16,7 @@
 <script>
 import request from './api.js'
 // import License from './components/License'
-import Panel from './components/Panel'
+import Panel from './components/Panel.vue'
 // import BottomNav from './components/BottomNav'
 import NpVacation from './SVG/npVacation.svg'
 

@@ -8,18 +8,12 @@
         <link rel="icon" href="favicon.ico" />
         <title>제대뺘ㅃ</title>
         <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"> -->
-		<link rel="manifest" href="manifest.json" />
-		<link
+        <link rel="manifest" href="manifest.json" />
+        <link rel="stylesheet" href="./main.css" />
+        <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Material+Icons"
         />
-        <script>
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('./sw.js').then(() => {
-                    console.log('Service Worker Registered.')
-                })
-            }
-        </script>
     </head>
     <body>
         <noscript>
@@ -29,6 +23,6 @@
             >
         </noscript>
         <div id="app"></div>
-        <!-- built files will be auto injected -->
+        <script src="./main.js"></script>
     </body>
 </html>
