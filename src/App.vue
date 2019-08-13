@@ -1,6 +1,8 @@
 <template>
-    <div>
-        <header class="center">{{ week }}</header>
+    <div id="root">
+        <md-toolbar md-elevation="3">
+            <h3 class="md-title">{{ week }}</h3>
+        </md-toolbar>
         <!-- TODO -->
         <panel v-if="isWeekday" :list="today_meal" />
         <div v-else class="weekend">
