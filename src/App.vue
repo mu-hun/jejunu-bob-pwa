@@ -8,10 +8,8 @@
         <div v-else class="weekend">
             <NpVacation />주말
         </div>
-        <!-- <div class="license">
-      <license />
-        </div>-->
-        <!-- <bottom-nav :time.sync="time" /> -->
+        <!-- <dialog :flag="false" /> -->
+        <bottom-nav :time.sync="time" />
     </div>
 </template>
 
@@ -19,7 +17,7 @@
 import request from './api.js'
 // import License from './components/License'
 import Panel from './components/Panel.vue'
-// import BottomNav from './components/BottomNav'
+import BottomNav from './components/BottomNav.vue'
 import NpVacation from './SVG/npVacation.svg'
 
 export default {
@@ -27,7 +25,7 @@ export default {
     components: {
         // License,
         Panel,
-        // BottomNav,
+        BottomNav,
         NpVacation
     },
     data: () => ({
