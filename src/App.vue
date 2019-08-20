@@ -3,8 +3,7 @@
         <md-toolbar md-elevation="3">
             <h3 class="md-title">{{ week }}</h3>
         </md-toolbar>
-        <!-- TODO -->
-        <panel v-if="isWeekday" :list="today_meal" />
+        <panel v-if="isWeekday" :list="today_meal" :open.sync="time" />
         <div v-else class="weekend">
             <NpVacation />주말
         </div>
@@ -69,8 +68,8 @@ export default {
 </script>
 
 <style scoped>
-.center {
-    margin: 0 auto;
+.md-toolbar {
+	justify-content: center;
 }
 
 .weekend {
