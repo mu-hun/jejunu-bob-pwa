@@ -4,15 +4,32 @@ const CACHE_API = () =>
         const weekday = Math.floor(DATE.getDate() / 7)
         return weekday === 1 && DATE.getHours() < 10 ? weekday - 1 : weekday
     })()}`
-const CACHE_NAME = 'cache_v2'
+const CACHE_NAME = 'cache_v3'
 
-// TODO: dynamic icon cache by regex
-// const ICON_NAME = 'icon_v1'
+const checkAgent = name => navigator.userAgent.indexOf(name) !== -1
 
 const API_URL =
     location.hostname === 'meals.muhun.dev'
         ? 'https://meals-data.muhun.kim'
         : 'https://meals-data.muhun.kim/dev'
+
+const Chrome = [
+    'img/icons/android-chrome-192x192.png',
+    'img/icons/android-chrome-512x512.png'
+]
+
+const Safari = [
+    'img/icons/apple-touch-icon-60x60.png',
+    'img/icons/apple-touch-icon-120x120.png',
+    'img/icons/apple-touch-icon-152x152.png',
+    'img/icons/apple-touch-icon-180x180.png',
+    'img/icons/apple-touch-icon.png'
+]
+
+let CacaheByAgent = []
+
+if (checkAgent('Chrome/')) CacaheByAgent.push(...Chrome)
+else if (!checkAgent('Firefox/')) CacaheByAgent.push(...Safari)
 
 const fileToCache = [
     '/',
@@ -21,18 +38,8 @@ const fileToCache = [
     'main.js',
     'main.css',
     'https://fonts.gstatic.com/s/materialicons/v47/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2',
-    'img/icons/android-chrome-192x192.png',
-    'img/icons/android-chrome-512x512.png',
-    'img/icons/apple-touch-icon-60x60.png',
-    'img/icons/apple-touch-icon-120x120.png',
-    'img/icons/apple-touch-icon-152x152.png',
-    'img/icons/apple-touch-icon-180x180.png',
-    'img/icons/apple-touch-icon.png',
-    'img/icons/favicon-32x32.png',
-    'img/icons/favicon-16x16.png',
-    'img/icons/msapplication-icon-144x144.png',
-    'img/icons/mstile-150x150.png',
-    'favicon.ico'
+    'favicon.ico',
+    ...CacaheByAgent
 ]
 
 self.addEventListener('install', evt => {
