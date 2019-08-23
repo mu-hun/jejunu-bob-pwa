@@ -1,0 +1,38 @@
+@import '~vue-material/dist/theme/engine'; // Import the theme engine
+
+$primary: rgb(12, 80, 160);
+$accent: rgb(38, 163, 203);
+
+@include md-register-theme(
+    'default',
+    (
+        primary: $primary,
+        accent: $accent
+    )
+);
+
+@include md-register-theme(
+    'default-dark',
+    (
+        primary: $primary,
+        accent: $accent,
+        theme: dark
+    )
+);
+
+@include md-register-theme(
+    'lite-bottom-bar',
+    (
+        primary: $accent
+    )
+);
+
+@include md-register-theme(
+    'dark-bottom-bar',
+    (
+        primary: $accent,
+        theme: dark
+    )
+);
+
+@import '~vue-material/dist/theme/all';
