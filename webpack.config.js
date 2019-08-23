@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const mode = process.env.MODE
-const isProd = mode !== 'production'
+const isDev = mode === 'development'
 
 module.exports = {
     mode,
@@ -12,7 +12,7 @@ module.exports = {
     },
     output: {
         filename: '[name].js',
-        // chunkFilename: '[name].js', // TODO: https://webpack.js.org/plugins/commons-chunk-plugin/
+        chunkFilename: '[id].js', // TODO: https://webpack.js.org/plugins/commons-chunk-plugin/
         path: `${__dirname}/public`
     },
 
@@ -42,7 +42,7 @@ module.exports = {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
                             publicPath: './public',
-                            hmr: !isProd
+                            hmr: isDev
                         }
                     },
                     'css-loader',
@@ -65,6 +65,7 @@ module.exports = {
         }),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
+            filename: '[name].css',
             chunkFilename: '[id].css'
         })
     ],
