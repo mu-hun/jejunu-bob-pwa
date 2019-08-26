@@ -1,8 +1,8 @@
 <template>
     <div>
         <!-- TODO: 패널 요소 모듈화 -->
-        <div v-for="(value, time) in list" :key="time" v-bind:class="{'active': time === sel}">
-            <button class="accordion" v-on:click="selClick(time)" v-text="time" />
+        <div v-for="(value, time) in list" :key="time" v-bind:class="{'active': time === selected}">
+            <button class="accordion" @click="CHANGE_TIME(time)" v-text="time" />
             <ul class="panel">
                 <li v-for="(menus, type) in value" :key="`${type}_list-tile`">
                     <div class="menus">{{menus | join}}</div>
@@ -14,31 +14,27 @@
 </template>
 
 <script>
+import { mapState, mapActions, mapGetters } from 'vuex'
+
 export default {
     name: 'Panel',
-    props: ['open', 'list'],
-    data() {
-        return {
-            sel: this.open
-        }
-    },
-    watch: {
-        open(newV) {
-            this.sel = newV
-        }
+    props: ['list'],
+    computed: {
+        ...mapGetters({ selected: 'time' })
     },
     filters: {
         join: arr => arr.join(' ').replace(/\(.+\)/, '')
     },
-    methods: {
-        selClick(val) {
-            this.$emit('update:open', val)
-        }
-    }
+    // TODO FIX: 데이터가 잘 전달되지만, 하단 바와 동기화 안됨
+    methods: mapActions(['CHANGE_TIME'])
 }
 </script>
 
 <style lang="scss" scoped>
+/* TODO add overwrite preitter rule: jsx-bracket-same-line 
+
+for single line property
+*/
 .md-theme-default-dark {
     .active > .accordion {
         background-color: rgb(39, 41, 43);

@@ -1,0 +1,4 @@
+{
+    // TODO: use recent babel version
+    "presets": [["env", { "modules": false }], "stage-3"]
+}

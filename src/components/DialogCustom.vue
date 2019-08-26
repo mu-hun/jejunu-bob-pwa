@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
     name: 'DialogCustom',
     computed: {
@@ -45,10 +47,12 @@ export default {
         showDialog: false,
         isOn: false
     }),
+    methods: {
+        ...mapActions(['CHANGE_THEME'])
+    },
     watch: {
-        isOn(newV) {
-            const bool = newV ? 'default-dark' : 'default'
-            this.$emit('@switch', bool)
+        isOn(bool) {
+            this.CHANGE_THEME(!bool)
         }
     }
 }
