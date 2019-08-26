@@ -5,17 +5,36 @@
         </md-toolbar>
         <template v-if="isWeekday">
             <panel v-if="isCacheVaild" :list="today_meal" :open.sync="time" />
-            <div v-else-if="isBeforeTenOclock">10시 이후에 새로운 학식 데이터가 업로드 됩니다.</div>
-            <div v-else="!isCacheVaild">네트워크 연결이 필요합니다.</div>
+            <section v-else-if="isBeforeTenOclock" class="network">
+                <vue-svg-filler
+                    path="SVG/tenOclock.svg"
+                    :fill="svgColor"
+                    width="130px"
+                    height="130px"
+                />
+                <p>10시 이후에 새로운 학식 데이터가 업로드 됩니다.</p>
+            </section>
+            <section v-else="!isCacheVaild" class="network">
+                <vue-svg-filler
+                    path="SVG/networkDisable.svg"
+                    :fill="svgColor"
+                    width="130px"
+                    height="130px"
+                />
+                <p>네트워크 연결이 필요합니다.</p>
+            </section>
         </template>
-        <template v-else class="weekend">
-            <NpVacation />주말
-        </template>
+        <section v-else class="weekend">
+            <vue-svg-filler
+                path="SVG/NpVacation.svg"
+                :fill="svgColor"
+                width="130px"
+                height="130px"
+            />
+            <p>주말</p>
+        </section>
         <dialog-custom v-on:@switch="swithTheme" />
-        <bottom-nav
-            :time.sync="time"
-            :theme="selectedTheme === 'default'? 'lite-bottom-bar': 'dark-bottom-bar'"
-        />
+        <bottom-nav :time.sync="time" :theme="setBottomTheme" />
     </md-content>
 </template>
 
@@ -24,7 +43,7 @@ import request from './api.js'
 import DialogCustom from './components/DialogCustom.vue'
 import Panel from './components/Panel.vue'
 import BottomNav from './components/BottomNav.vue'
-import NpVacation from './SVG/npVacation.svg'
+import VueSvgFiller from 'vue-svg-filler'
 
 const weekDict = {
     0: '일요일',
@@ -36,13 +55,17 @@ const weekDict = {
     6: '토요일'
 }
 
+const THEMES = ['default', 'default-dark']
+
+// const TIME = { 점심: [true, false], 저녁: [false, true] }
+
 export default {
     name: 'App',
     components: {
         DialogCustom,
         Panel,
         BottomNav,
-        NpVacation
+        VueSvgFiller
     },
     data: () => ({
         cache_keys: [],
@@ -50,9 +73,7 @@ export default {
         isWeekday: true,
         week: '월요일',
         time: '점심',
-        timeKey: { 점심: [true, false], 저녁: [false, true] },
-        panel: [true, false],
-        showDialog: false,
+        // panel: [true, false],
         // weekly_meal: {}, //TODO
         today_meal: {},
         selectedTheme: 'default'
@@ -61,6 +82,14 @@ export default {
         isCacheVaild() {
             const api_v = `api_${Math.floor(new Date().getDate() / 7)}`
             return this.cache_keys.findIndex(itm => itm == api_v) > -1
+        },
+        setBottomTheme() {
+            return this.selectedTheme === 'default'
+                ? 'lite-bottom-bar'
+                : 'dark-bottom-bar'
+        },
+        svgColor() {
+            return this.selectedTheme === THEMES[0] ? '#000000' : '#F1F1F1'
         }
     },
     created() {
@@ -90,12 +119,12 @@ export default {
         swithTheme(val) {
             this.selectedTheme = val
         }
-    },
-    watch: {
-        time(newV) {
-            this.panel = this.timeKey[newV]
-        }
     }
+    // watch: {
+    //     time(newV) {
+    //         this.panel = TIME[newV]
+    //     }
+    // }
 }
 </script>
 
@@ -120,7 +149,7 @@ export default {
         align-items: center;
         font-size: x-large;
         height: 100%;
-        width: 100%;
+		width: 100%;
     }
 }
 </style>

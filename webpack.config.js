@@ -23,10 +23,6 @@ module.exports = {
                 loader: 'vue-loader'
             },
             {
-                test: /\.svg$/,
-                loader: 'vue-svg-loader'
-            },
-            {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
@@ -60,7 +56,8 @@ module.exports = {
                 '!manifest.json',
                 '!index.html',
                 '!favicon.ico',
-                '!img/*'
+                '!img/*',
+                '!SVG/*'
             ]
         }),
         new VueLoaderPlugin(),
