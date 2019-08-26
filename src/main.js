@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
-// import './registerSW'
+import './registerSW'
 import {
     MdButton,
     MdIcon,

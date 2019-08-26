@@ -4,7 +4,8 @@ const CACHE_API = () =>
         const weekday = Math.floor(DATE.getDate() / 7)
         return weekday === 1 && DATE.getHours() < 10 ? weekday - 1 : weekday
     })()}`
-const CACHE_NAME = 'cache_v3'
+// TODO: dynamic versioning
+const CACHE_NAME = 'beta_v1'
 
 const checkAgent = name => navigator.userAgent.indexOf(name) !== -1
 
@@ -37,7 +38,7 @@ const fileToCache = [
     'https://fonts.googleapis.com/css?family=Material+Icons',
     'main.js',
     'main.css',
-    'https://fonts.gstatic.com/s/materialicons/v47/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2',
+    'https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2',
     'favicon.ico',
     ...CacaheByAgent
 ]
