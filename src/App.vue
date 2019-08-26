@@ -129,27 +129,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@mixin flex-column() {
+    display: flex;
+    flex-direction: column;
+}
+
 #root.md-theme-default-dark {
     background-color: rgb(24, 26, 27);
 }
 
 #root {
-    display: flex;
+    @include flex-column();
     height: 100vh;
-    flex-direction: column;
+    justify-content: flex-start;
 
     .md-toolbar {
         justify-content: center;
     }
 
+    .network,
     .weekend {
-        display: flex;
-        flex-direction: column;
+        @include flex-column();
         justify-content: center;
         align-items: center;
         font-size: x-large;
         height: 100%;
-		width: 100%;
+        word-break: keep-all;
     }
 }
 </style>

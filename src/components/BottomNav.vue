@@ -18,11 +18,11 @@ export default {
 </script>
 
 <style lang="scss">
+/* hack: scoped 스타일링이 안됨 */
 .md-bottom-bar {
-    position: absolute;
-	bottom: 0;
-	> div {
-		justify-content: space-around;
-	}
+    margin-top: auto;
+    > div {
+        justify-content: space-around;
+    }
 }
 </style>
