@@ -1,5 +1,5 @@
 <template>
-    <md-content id="root" :md-theme="selectedTheme">
+    <md-content :md-theme="selectedTheme">
         <md-toolbar md-elevation="3">
             <h3 class="md-title">{{ week }}</h3>
         </md-toolbar>
@@ -117,11 +117,11 @@ export default {
     flex-direction: column;
 }
 
-#root.md-theme-default-dark {
+.md-content.md-theme-dark {
     background-color: rgb(24, 26, 27);
 }
 
-#root {
+.md-content {
     @include flex-column();
     height: 100vh;
     justify-content: flex-start;
@@ -138,6 +138,9 @@ export default {
         font-size: x-large;
         height: 100%;
         word-break: keep-all;
+		p {
+			margin-top: 12px;
+		}
     }
 }
 </style>

@@ -5,10 +5,10 @@
                 <md-icon>close</md-icon>
             </md-button>
             <md-dialog-title v-text="'라이선스 정보'" />
-            <ul class="margin">
+            <ul class="modules">
                 <li v-for="item in getList" :key="item.name" avatar>
-                    <div>{{item.name}}</div>
-                    <a target="_blank" :href="item.link">{{item.link}}</a>
+                    <div v-text="item.name" />
+                    <a :href="item.link" v-text="item.link" />
                 </li>
                 <li style="margin-top: 14px">
                     자세한 내역은
@@ -19,7 +19,7 @@
                 </li>
             </ul>
             <md-dialog-title>어두운 모드</md-dialog-title>
-            <md-switch class="md-primary margin" v-model="isOn">{{ isOn? '켜': '꺼' }}짐</md-switch>
+            <md-switch class="md-primary" v-model="isOn">{{ isOn? '켜': '꺼' }}짐</md-switch>
         </md-dialog>
 
         <md-button class="md-fab md-primary" @click="showDialog = true">
@@ -59,10 +59,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.md-theme-default-dark {
-    a:not(.md-button) {
-        color: #f1f1f1;
-    }
+.md-theme-dark a:not(.md-button) {
+    color: #f1f1f1;
 }
 
 .md-icon-button {
@@ -80,17 +78,11 @@ export default {
 .md-dialog {
     max-width: 80vw;
     height: 400px;
+    font-family: sans-serif;
+}
 
-    .margin {
-        margin: 0 24px;
-    }
-
-    ul {
-        padding: 0;
-    }
-
-    li {
-        list-style-type: none;
-    }
+.modules,
+.md-switch {
+    margin: 0 24px;
 }
 </style>

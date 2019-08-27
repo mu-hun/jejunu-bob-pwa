@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const TIME_LIST = ['점심', '저녁']
-const THEME_LIST = ['default', 'default-dark']
+const THEME_LIST = ['default', 'dark']
 
 const WRONG_ARGU = newV => Error('잘못된 인자가 들어왔습니다:', newV)
 
