@@ -24,7 +24,6 @@ export default new Vuex.Store({
     mutations: {
         TIME_SELECT(state, newV) {
             if (!TIME_LIST.includes(newV)) throw WRONG_ARGU(newV)
-            console.log(newV)
             state.time = newV
         },
         THEME_SELECT(state, newV) {
