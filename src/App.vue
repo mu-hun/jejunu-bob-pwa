@@ -125,9 +125,9 @@ export default {
         font-size: x-large;
         height: 100%;
         word-break: keep-all;
-		p {
-			margin-top: 12px;
-		}
+        p {
+            margin-top: 12px;
+        }
     }
 }
 </style>
