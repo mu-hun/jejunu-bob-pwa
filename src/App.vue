@@ -63,13 +63,15 @@ export default {
     }),
     computed: {
         ...mapState(['time', 'selectedTheme']),
-        ...mapGetters(['setBottomTheme', 'setSvgColor']),
+        ...mapGetters(['setBottomTheme', 'setSvgColor'])
+    },
+    methods: {
+        ...mapActions(['CHANGE_TIME']),
         isCacheVaild() {
             const api_v = `api_${Math.floor(new Date().getDate() / 7)}`
             return this.cache_keys.findIndex(itm => itm == api_v) > -1
         }
     },
-    methods: mapActions(['CHANGE_TIME']),
     created() {
         caches.keys().then(keys => (this.cache_keys = keys))
 
