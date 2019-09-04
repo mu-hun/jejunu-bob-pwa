@@ -1,3 +1,4 @@
+@import './reset';
 @import '~vue-material/dist/theme/engine'; // Import the theme engine
 
 $primary: rgb(12, 80, 160);
@@ -12,7 +13,7 @@ $accent: rgb(38, 163, 203);
 );
 
 @include md-register-theme(
-    'default-dark',
+    'dark',
     (
         primary: $primary,
         accent: $accent,

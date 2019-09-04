@@ -2,12 +2,11 @@
 
 제주대학교 학생회관 학식 PWA 앱
 
-이슈 [#1](https://github.com/BetaF1sh/jejunu-bob-pwa/issues/1) 에서 진행 현황을 볼 수 있습니다.
+[칸-반 보드](https://github.com/x86chi/jejunu-bob-pwa/projects/1)에서 진행 현황을 볼 수 있습니다.
 
-| Deploy status | Code style |
-| :--: | :--: |
-| [![Netlify Status](https://api.netlify.com/api/v1/badges/33b88133-f78a-46c6-b646-e573550c7dcd/deploy-status)](https://meals.muhun.dev) | [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com) |
-
+|                                                             Deploy status                                                              |
+| :------------------------------------------------------------------------------------------------------------------------------------: |
+| [![Netlify Status](https://api.netlify.com/api/v1/badges/33b88133-f78a-46c6-b646-e573550c7dcd/deploy-status)](https://meals.muhun.dev) |
 
 
 ## License

@@ -1,9 +1,14 @@
 <template>
     <div>
         <!-- TODO: 패널 요소 모듈화 -->
-        <div v-for="(value, time) in list" :key="time" v-bind:class="{'active': time === selected}">
-            <button class="accordion" @click="CHANGE_TIME(time)" v-text="time" />
-            <ul class="panel">
+        <div v-for="(value, time) in list" :key="time">
+            <button
+                class="accordion"
+                :class="{'active': time === selected}"
+                @click="CHANGE_TIME(time)"
+                v-text="time"
+            />
+            <ul class="panel" :class="{'active': time === selected}">
                 <li v-for="(menus, type) in value" :key="`${type}_list-tile`">
                     <div class="menus">{{menus | join}}</div>
                     <div class="time">{{type}}</div>
@@ -35,30 +40,10 @@ export default {
 
 for single line property
 */
-.md-theme-default-dark {
-    .active > .accordion {
-        background-color: rgb(39, 41, 43);
-    }
-    .accordion {
-        background-color: rgb(29, 31, 32);
-        color: rgb(208, 204, 197);
-    }
 
-    .panel {
-        background-color: inherit;
-
-        :after {
-            background-color: inherit;
-        }
-
-        .menus {
-            color: rgba(232, 230, 227, 0.87);
-        }
-
-        .time {
-            color: rgba(232, 230, 227, 0.54);
-        }
-    }
+.accordion,
+.panel {
+    line-height: 20px;
 }
 
 .accordion {
@@ -68,10 +53,6 @@ for single line property
     padding: 18px;
     width: 100%;
     text-align: left;
-    border: none;
-    outline: none;
-    transition: 0.4s;
-    line-height: 1.5;
     font-size: 12px;
 
     :hover {
@@ -79,32 +60,49 @@ for single line property
     }
 }
 
-.active {
-    .accordion {
-        background-color: #ccc;
-    }
+.accordion.active {
+    background-color: #ccc;
+}
 
-    .panel {
-        display: block;
-    }
+.panel.active {
+    display: block;
 }
 
 .panel {
     padding: 14px 18px;
-    margin: 0;
     background-color: white;
     display: none;
     overflow: hidden;
-    /* TODO: animation
-	transition: 54 0.2s ease-out; */
-    li {
-        list-style-type: none;
-        .menus {
-            font-size: 16px;
-        }
-        .time {
-            color: rgba(0, 0, 0, 0.54);
-        }
+}
+
+.menus {
+    font-size: 16px;
+}
+
+.time {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.md-theme-dark {
+    .accordion.active {
+        background-color: rgb(39, 41, 43);
+    }
+    .accordion {
+        background-color: rgb(29, 31, 32);
+        color: rgb(208, 204, 197);
+    }
+
+    .panel,
+    .panel:after {
+        background-color: inherit;
+    }
+
+    .menus {
+        color: rgba(232, 230, 227, 0.87);
+    }
+
+    .time {
+        color: rgba(232, 230, 227, 0.54);
     }
 }
 </style>

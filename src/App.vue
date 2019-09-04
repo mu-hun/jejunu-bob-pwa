@@ -1,36 +1,21 @@
 <template>
-    <md-content id="root" :md-theme="selectedTheme">
+    <md-content :md-theme="selectedTheme">
         <md-toolbar md-elevation="3">
             <h3 class="md-title">{{ week }}</h3>
         </md-toolbar>
         <template v-if="isWeekday">
             <panel v-if="isCacheVaild" :list="today_meal" />
             <section v-else-if="isBeforeTenOclock" class="network">
-                <vue-svg-filler
-                    path="SVG/tenOclock.svg"
-                    :fill="setSvgColor"
-                    width="130px"
-                    height="130px"
-                />
+                <svg-wrapper name="tenOclock" />
                 <p>10시 이후에 새로운 학식 데이터가 업로드 됩니다.</p>
             </section>
             <section v-else="!isCacheVaild" class="network">
-                <vue-svg-filler
-                    path="SVG/networkDisable.svg"
-                    :fill="setSvgColor"
-                    width="130px"
-                    height="130px"
-                />
+                <svg-wrapper name="networkDisable" />
                 <p>네트워크 연결이 필요합니다.</p>
             </section>
         </template>
         <section v-else class="weekend">
-            <vue-svg-filler
-                path="SVG/NpVacation.svg"
-                :fill="setSvgColor"
-                width="130px"
-                height="130px"
-            />
+            <svg-wrapper name="NpVacation" />
             <p>주말</p>
         </section>
         <dialog-custom />
@@ -45,7 +30,7 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import DialogCustom from './components/DialogCustom.vue'
 import Panel from './components/Panel.vue'
 import BottomNav from './components/BottomNav.vue'
-import VueSvgFiller from 'vue-svg-filler'
+import SvgWrapper from './components/SvgWrapper.vue'
 
 const weekDict = {
     0: '일요일',
@@ -65,7 +50,7 @@ export default {
         DialogCustom,
         Panel,
         BottomNav,
-        VueSvgFiller
+        SvgWrapper
     },
     data: () => ({
         cache_keys: [],
@@ -78,13 +63,15 @@ export default {
     }),
     computed: {
         ...mapState(['time', 'selectedTheme']),
-        ...mapGetters(['setBottomTheme', 'setSvgColor']),
+        ...mapGetters(['setBottomTheme', 'setSvgColor'])
+    },
+    methods: {
+        ...mapActions(['CHANGE_TIME']),
         isCacheVaild() {
             const api_v = `api_${Math.floor(new Date().getDate() / 7)}`
             return this.cache_keys.findIndex(itm => itm == api_v) > -1
         }
     },
-    methods: mapActions(['CHANGE_TIME']),
     created() {
         caches.keys().then(keys => (this.cache_keys = keys))
 
@@ -117,11 +104,11 @@ export default {
     flex-direction: column;
 }
 
-#root.md-theme-default-dark {
+.md-content.md-theme-dark {
     background-color: rgb(24, 26, 27);
 }
 
-#root {
+.md-content {
     @include flex-column();
     height: 100vh;
     justify-content: flex-start;
@@ -138,6 +125,9 @@ export default {
         font-size: x-large;
         height: 100%;
         word-break: keep-all;
+        p {
+            margin-top: 12px;
+        }
     }
 }
 </style>

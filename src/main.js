@@ -12,7 +12,7 @@ import {
     MdSwitch
 } from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
-import './styles/theme.scss'
+import './scss/theme.scss'
 
 Vue.use(MdButton)
 Vue.use(MdIcon)

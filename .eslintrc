@@ -1,25 +1,13 @@
 {
-	"root": true,
-	"extends": [
-		"standard",
-		"prettier",
-		"prettier/vue",
-		"plugin:vue/recommended",
-		"plugin:prettier/recommended"
-	],
-	"plugins": [
-		"prettier",
-		"standard",
-		"vue"
-	],
-	"env": {
-		"es6": true
-	},
-	"rules": {
-		"standard/object-curly-even-spacing": [2, "either"],
-		"standard/array-bracket-even-spacing": [2, "either"],
-		"standard/computed-property-even-spacing": [2, "even"],
-		"standard/no-callback-literal": [2, ["cb", "callback"]],
-		"prettier/prettier": "error"
-	}
+    "root": true,
+    "extends": [
+        "prettier",
+        "prettier/vue",
+        "prettier/babel",
+        "plugin:vue/recommended",
+        "plugin:prettier/recommended"
+    ],
+    "env": {
+        "es6": true
+    }
 }
