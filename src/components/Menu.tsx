@@ -2,11 +2,8 @@ import React, { Fragment } from 'react'
 import { Menu } from '../@types'
 
 import { Item, ItemText } from './MUI'
-type Prop = {
-  menus: Menu
-}
 
-export default ({ menus }: Prop) => (
+export default ({ menus }: { menus: Menu }) => (
   <Fragment>
     {Object.entries(menus).map(([type, menu]) => (
       // @ts-ignore

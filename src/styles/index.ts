@@ -8,7 +8,6 @@ export const appStyles = makeStyles((theme: Theme) =>
     },
     paper: {
       height: '100%'
-      //   paddingBottom: 16
     },
     list: {
       marginBottom: theme.spacing(2)
