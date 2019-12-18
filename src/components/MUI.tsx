@@ -13,15 +13,12 @@ import {
   BottomNavigation
 } from '@material-ui/core'
 
-import {
-  Info as InfoIcon,
-  ExpandMore
-} from '@material-ui/icons'
+import { ExpandMore, Info as InfoIcon } from '@material-ui/icons'
 
 import { WeekStr } from '../@types'
 
 export const Item = styled(ListItem)({
-  padding: '4px 24px'
+  padding: '4px 1rem'
 })
 
 export const ItemText = ({ menu, type }: { menu: string[]; type: string }) => (
@@ -30,6 +27,7 @@ export const ItemText = ({ menu, type }: { menu: string[]; type: string }) => (
 
 export const PanelByTime = ({ time }: { time: string }) => (
   <ExpansionPanelSummary
+    style={{ padding: '0 1rem' }}
     expandIcon={<ExpandMore />}
     aria-controls="panel1a-content"
     id="panel1a-header"
@@ -43,7 +41,7 @@ export const Ul = styled(List)({
 })
 
 export const TodayOfWeek = ({ weekday }: { weekday: WeekStr }) => (
-  <Typography variant="h5" style={{ padding: '2rem 2rem 2rem' }} gutterBottom>
+  <Typography variant="h5" style={{ padding: '1rem' }} gutterBottom>
     {weekday}
   </Typography>
 )
