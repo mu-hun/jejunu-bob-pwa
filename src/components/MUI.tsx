@@ -22,7 +22,11 @@ export const Item = styled(ListItem)({
 })
 
 export const ItemText = ({ menu, type }: { menu: string[]; type: string }) => (
-  <ListItemText primary={menu.join(', ')} secondary={type} />
+  <ListItemText
+    style={{ wordBreak: 'keep-all' }}
+    primary={menu.join(', ')}
+    secondary={type}
+  />
 )
 
 export const PanelByTime = ({ time }: { time: string }) => (
