@@ -1,12 +1,19 @@
-export type WeeklyMenu = {
-  0: WeekDay
-  1: WeekDay
-  2: WeekDay
-  3: WeekDay
-  4: WeekDay
+export type Weekly = {
+  0: DayofMenu
+  1: DayofMenu
+  2: DayofMenu
+  3: DayofMenu
+  4: DayofMenu
 }
 
-export enum Weeks {
+export enum State {
+  'isWeekend',
+  'isWait',
+  'isLoading',
+  'isLoaded'
+}
+
+export enum Week {
   '월요일',
   '화요일',
   '수요일',
@@ -14,14 +21,21 @@ export enum Weeks {
   '금요일'
 }
 
-export type WeekKey = keyof typeof Weeks
-
-export type WeekDay = {
-  점심: Menus
-  저녁: Menus
+export enum DayofTime {
+  '점심',
+  '저녁'
 }
 
-export type Menus = {
+export type WeekStr = keyof typeof Week
+
+export type WeekIndex = keyof Weekly
+
+export type DayofMenu = {
+  점심: Menu
+  저녁: Menu
+}
+
+export type Menu = {
   정식: string[]
   특식: string[]
   양식: string[]
