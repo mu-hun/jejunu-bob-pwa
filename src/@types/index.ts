@@ -21,7 +21,7 @@ export type WeekDay = {
   저녁: Menus
 }
 
-type Menus = {
+export type Menus = {
   정식: string[]
   특식: string[]
   양식: string[]
