@@ -1,53 +1,39 @@
-import { Dispatch, SetStateAction } from 'react'
-import { WeeklyMenu, WeekDay } from './@types'
+import { Weekly, State, WeekIndex, Week, WeekStr, DayofTime } from './@types'
 import axios, { AxiosResponse } from 'axios'
 
 const isDev = process.env.NODE_ENV === 'development'
 
-export const fetch = (): Promise<AxiosResponse<WeeklyMenu>> =>
+export const getState = () => {
+  const { weekNum, hour } = getWeekAndHour()
+
+  if (weekNum === -1 || weekNum === 5) return State.isWeekend
+
+  if (weekNum === 0 && 11 > hour) return State.isWait
+
+  return State.isOK
+}
+
+export const getTime = () => {
+  const { weekNum, hour } = getWeekAndHour()
+  return {
+    weekStr: Week[weekNum as WeekIndex] as WeekStr,
+    dayofTime: hour < 15 ? DayofTime['점심'] : DayofTime['저녁']
+  }
+}
+
+export const fetchData = async () => {
+  const index = getWeek() as WeekIndex
+  return (await fetch()).data[index]
+}
+
+const getWeek = () => new Date().getDay() - 1
+
+const getWeekAndHour = () => {
+  const date = new Date()
+  return { weekNum: date.getDay() - 1, hour: date.getHours() }
+}
+
+const fetch = (): Promise<AxiosResponse<Weekly>> =>
   axios.get(
     isDev ? 'https://meals-data.muhun.kim/dev' : 'https://meals-data.muhun.kim'
   )
-
-type WeeklyMenuKeys = keyof WeeklyMenu
-type DateNums = WeeklyMenuKeys | 5 | 6
-
-export const effectFetch = async ({
-  setState,
-  index
-}: {
-  setState: Dispatch<SetStateAction<WeekDay | undefined>>
-  index: keyof WeeklyMenu
-}) => {
-  setState((await fetch()).data[index])
-}
-
-type Return =
-  | {
-      isWeekend: true
-    }
-  | {
-      isWeekend: false
-      isWait: true
-    }
-  | {
-      isWeekend: false
-      isWait: false
-      index: WeeklyMenuKeys
-    }
-
-export const getWeek = (): Return => {
-  const date = new Date()
-  const weekday = date.getDay() as DateNums
-  const hour = date.getHours()
-  const lunchOrDinner = hour < 15 ? '점심' : '저녁'
-
-  if (weekday === 0 || weekday === 6) return { isWeekend: true }
-
-  // if (weekday === )
-
-  const Mon2Fri = (weekday - 1) as WeeklyMenuKeys
-
-  if (Mon2Fri === 0 && 11 > hour) return { isWeekend: false, isWait: true }
-  return { isWeekend: false, isWait: false, index: Mon2Fri }
-}
