@@ -21,7 +21,7 @@ import {
   ExpandMore
 } from '@material-ui/icons'
 
-import { WeekKey } from '../@types'
+import { WeekStr } from '../@types'
 
 export const Item = styled(ListItem)({
   padding: '4px 24px'
@@ -45,7 +45,7 @@ export const Ul = styled(List)({
   marginBottom: '2rem'
 })
 
-export const TodayOfWeek = ({ weekday }: { weekday: WeekKey }) => (
+export const TodayOfWeek = ({ weekday }: { weekday: WeekStr }) => (
   <Typography variant="h5" style={{ padding: '2rem 2rem 2rem' }} gutterBottom>
     {weekday}
   </Typography>

@@ -1,43 +1,64 @@
 import React, { Fragment, useState, useEffect } from 'react'
+
 import { CssBaseline } from '@material-ui/core'
 
 import List from './components/List'
 import AppBar from './components/BottomNav'
 
-import { getWeek, effectFetch } from './api'
-import { WEEKS } from './variables'
-
-import { WeekDay, WeekKey, WeeklyMenu } from './@types'
+import { DayofMenu, WeekStr, State, DayofTime } from './@types'
 
 import { TodayOfWeek, Wrapper } from './components/MUI'
+import { getState, fetchData } from './api'
 
 const App: React.FC = () => {
-  const [weekday, setWeekday] = useState<WeekKey>('월요일')
-  const [lunchOrDinner, setTime] = useState<keyof WeekDay>()
-  const [todayMenus, setTodayMenu] = useState<WeekDay>()
+  const [state] = useState(getState())
+  const [dayOfMenu, setDayOfMenu] = useState<DayofMenu>()
+
+  const fetchFunction = async () => {
+    setDayOfMenu(await fetchData())
+  }
 
   useEffect(() => {
-    const data = getWeek()
+    if (state.state !== State.isWeekend && state.state !== State.isWait)
+      fetchFunction()
+  }, [state.state])
 
-    if (data.isWeekend || data.isWait) return
+  if (dayOfMenu && state.state === State.isLoaded)
+    return (
+      <View
+        weekStr={state.weekStr}
+        dayofTime={state.dayofTime}
+        dayOfMenu={dayOfMenu}
+      />
+    )
 
-    const { index } = data
-    // hack: index return any type
-    setWeekday(WEEKS[index])
-    setTime(lunchOrDinner as keyof WeekDay)
-
-    effectFetch({ setState: setTodayMenu, index })
-  }, [lunchOrDinner])
-  return (
-    <Fragment>
-      <CssBaseline />
-      <Wrapper square>
-        <TodayOfWeek weekday={weekday} />
-        {todayMenus ? <List todayMenus={todayMenus} /> : <div>LODING</div>}
-      </Wrapper>
-      <AppBar index={0} />
-    </Fragment>
-  )
+  switch (state.state) {
+    case State.isLoading:
+      return <div>LODING</div>
+    case State.isWeekend:
+      return <div>주말</div>
+    case State.isWait:
+      return <div>아직 새로운 식단을 보여줄 준비가 안되어 있어요!</div>
+    default:
+      return <div>null</div>
+  }
 }
 
 export default App
+
+type Props = {
+  weekStr: WeekStr
+  dayofTime: DayofTime
+  dayOfMenu: DayofMenu
+}
+
+const View = ({ weekStr, dayofTime, dayOfMenu }: Props) => (
+  <Fragment>
+    <CssBaseline />
+    <Wrapper square>
+      <TodayOfWeek weekday={weekStr} />
+      {<List DayofTime={dayofTime} DayofMenu={dayOfMenu} />}
+    </Wrapper>
+    <AppBar index={0} />
+  </Fragment>
+)
