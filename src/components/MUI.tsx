@@ -10,13 +10,10 @@ import {
   Typography,
   Paper,
   Fab,
-  BottomNavigation,
-  BottomNavigationAction as Action
+  BottomNavigation
 } from '@material-ui/core'
 
 import {
-  Launch as LunchIcon,
-  Restaurant as DinnerIcon,
   Info as InfoIcon,
   ExpandMore
 } from '@material-ui/icons'
@@ -76,10 +73,4 @@ export const Info = () => (
   >
     <InfoIcon />
   </Fab>
-)
-
-export const Lunch = () => <Action label="점심" icon={<LunchIcon />} />
-
-export const Dinner = () => (
-  <Action label="저녁" icon={<DinnerIcon color={'secondary'} />} />
 )
