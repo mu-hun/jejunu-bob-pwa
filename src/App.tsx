@@ -15,7 +15,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { fetchData, getTime } from './api'
 
-const selector = ({ state, data }: RootState) => ({ state, data })
+const selector = ({ state, data, time }: RootState) => ({ state, data, time })
 
 export default () => {
   const { state } = useSelector(selector)
@@ -41,7 +41,7 @@ export default () => {
 }
 
 const View = () => {
-  const { data } = useSelector(selector)
+  const { data, time } = useSelector(selector)
 
   const dispatch = useDispatch()
 
@@ -49,7 +49,7 @@ const View = () => {
     dispatch(setData(await fetchData()))
   }
 
-  const { weekStr, dayofTime } = getTime()
+  const { weekStr } = getTime()
 
   useEffect(() => {
     fetching()
@@ -61,9 +61,9 @@ const View = () => {
       <CssBaseline />
       <Wrapper square>
         <TodayOfWeek weekday={weekStr} />
-        {<List DayofTime={dayofTime} DayofMenu={data} />}
+        {<List DayofTime={time} DayofMenu={data} />}
       </Wrapper>
-      <AppBar index={0} />
+      <AppBar target={time} />
     </Fragment>
   )
 }
