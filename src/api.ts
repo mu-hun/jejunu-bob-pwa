@@ -3,21 +3,19 @@ import axios, { AxiosResponse } from 'axios'
 
 const isDev = process.env.NODE_ENV === 'development'
 
-export type StateReturn =
-  | { state: State.isWeekend }
-  | { state: State.isWait }
-  | { state: State.isLoading }
-  | { state: State.isLoaded; weekStr: WeekStr; dayofTime: DayofTime }
-
-export const getState = (): StateReturn => {
+export const getState = () => {
   const { weekNum, hour } = getWeekAndHour()
 
-  if (weekNum === -1 || weekNum === 5) return { state: State.isWeekend }
+  if (weekNum === -1 || weekNum === 5) return State.isWeekend
 
-  if (weekNum === 0 && 11 > hour) return { state: State.isWait }
+  if (weekNum === 0 && 11 > hour) return State.isWait
 
+  return State.isOK
+}
+
+export const getTime = () => {
+  const { weekNum, hour } = getWeekAndHour()
   return {
-    state: State.isLoaded,
     weekStr: Week[weekNum as WeekIndex] as WeekStr,
     dayofTime: hour < 15 ? DayofTime['점심'] : DayofTime['저녁']
   }

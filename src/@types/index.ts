@@ -10,7 +10,7 @@ export enum State {
   'isWeekend',
   'isWait',
   'isLoading',
-  'isLoaded'
+  'isOK'
 }
 
 export enum Week {
