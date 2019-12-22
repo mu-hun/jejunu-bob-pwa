@@ -9,6 +9,8 @@ import { TodayOfWeek, Wrapper } from './components/MUI'
 import List from './components/List'
 import AppBar from './components/BottomNav'
 
+import { Weekend, Waiting, NoInternet } from './components/Status'
+
 import { State } from './@types'
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -32,11 +34,11 @@ export default () => {
     case State.isOK:
       return <View />
     case State.isWeekend:
-      return <div>주말</div>
+      return <Weekend />
     case State.isWait:
-      return <div>아직 새로운 식단을 보여줄 준비가 안되어 있어요!</div>
+      return <Waiting />
     default:
-      return <div>실패</div>
+      return <NoInternet />
   }
 }
 
