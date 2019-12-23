@@ -73,6 +73,10 @@ export const Info = () => (
       margin: '0 auto'
     }}
   >
-    <InfoIcon />
+    <InfoIcon
+      onClick={() => {
+        window.open('https://github.com/x86chi/jejunu-bob-pwa', '_blank')
+      }}
+    />
   </Fab>
 )
