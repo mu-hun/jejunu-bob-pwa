@@ -1,8 +1,6 @@
 import { Weekly, State, WeekIndex, Week, WeekStr, DayofTime } from './@types'
 import axios, { AxiosResponse } from 'axios'
 
-const isDev = process.env.NODE_ENV === 'development'
-
 export const getState = () => {
   const { weekNum, hour } = getWeekAndHour()
 
@@ -35,5 +33,7 @@ const getWeekAndHour = () => {
 
 const fetch = (): Promise<AxiosResponse<Weekly>> =>
   axios.get(
-    isDev ? 'https://meals-data.muhun.kim/dev' : 'https://meals-data.muhun.kim'
+    window.location.hostname === 'localhost'
+      ? 'https://meals-data.muhun.kim/dev'
+      : 'https://meals-data.muhun.kim'
   )

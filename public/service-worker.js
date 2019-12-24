@@ -1,41 +1,16 @@
-importScripts(
-  'https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js'
-)
-
-if (workbox) {
-  console.log(`Yay! Workbox is loaded 🎉`)
-
-  workbox.routing.registerRoute(
-    /\.js$/,
-    new workbox.strategies.StaleWhileRevalidate({
-      cacheName: 'css-cache'
-    })
-  )
-
-  workbox.routing.registerRoute(
-    /\.css$/,
-    new workbox.strategies.StaleWhileRevalidate({
-      cacheName: 'css-cache'
-    })
-  )
-} else {
-  console.log(`Boo! Workbox didn't load 😬`)
-}
-
-const CACHE_API = () =>
+const getCacheVersion = () =>
   `api_${(() => {
     const DATE = new Date()
     const weekday = Math.floor(DATE.getDate() / 7)
     return weekday === 1 && DATE.getHours() < 10 ? weekday - 1 : weekday
   })()}`
+
 const CACHE_NAME = 'cache_v3'
 
-const checkAgent = name => navigator.userAgent.indexOf(name) !== -1
-
 const API_URL =
-  location.hostname === 'meals.muhun.dev'
-    ? 'https://meals-data.muhun.kim'
-    : 'https://meals-data.muhun.kim/dev'
+  location.hostname === 'localhost'
+    ? 'https://meals-data.muhun.kim/dev'
+    : 'https://meals-data.muhun.kim'
 
 const Chrome = [
   'icons/android-chrome-192x192.png',
@@ -50,15 +25,28 @@ const Safari = [
   'icons/apple-touch-icon.png'
 ]
 
+const staticFiles = [
+  'static/js/2.bd519703.chunk.js',
+  'static/js/main.480d018b.chunk.js',
+  'static/js/runtime-main.d660bfe9.js',
+  'static/css/main.2ea63e07.chunk.css'
+]
+
 let CacaheByAgent = []
 
+const checkAgent = name => navigator.userAgent.indexOf(name) !== -1
 if (checkAgent('Chrome/')) CacaheByAgent.push(...Chrome)
 else if (!checkAgent('Firefox/')) CacaheByAgent.push(...Safari)
 
-const fileToCache = ['/', 'manifest.json', 'favicon.ico', ...CacaheByAgent]
+const fileToCache = [
+  '/',
+  'manifest.json',
+  'favicon.ico',
+  ...CacaheByAgent,
+  ...staticFiles
+]
 
 self.addEventListener('install', evt => {
-  console.log('install', evt)
   evt.waitUntil(
     caches
       .open(CACHE_NAME)
@@ -67,14 +55,13 @@ self.addEventListener('install', evt => {
   )
   evt.waitUntil(
     caches
-      .open(CACHE_API())
+      .open(getCacheVersion())
       .then(cache => cache.addAll([API_URL]))
       .catch(evt => console.log(evt))
   )
 })
 
 self.addEventListener('fetch', evt => {
-  console.log('[sw.js]', evt.request)
   evt.respondWith(
     caches
       .match(evt.request)
@@ -84,7 +71,7 @@ self.addEventListener('fetch', evt => {
 })
 
 self.addEventListener('activate', evt => {
-  const cacheWhitelist = [CACHE_NAME, CACHE_API()]
+  const cacheWhitelist = [CACHE_NAME, getCacheVersion()]
   evt.waitUntil(
     caches.keys().then(names =>
       Promise.all(
