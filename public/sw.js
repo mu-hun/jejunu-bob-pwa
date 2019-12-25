@@ -9,9 +9,9 @@ const CACHE_NAME = 'cache_v3'
 const checkAgent = name => navigator.userAgent.indexOf(name) !== -1
 
 const API_URL =
-    location.hostname === 'meals.muhun.dev'
-        ? 'https://meals-data.muhun.kim'
-        : 'https://meals-data.muhun.kim/dev'
+    location.hostname === 'localhost'
+        ? 'https://meals-data.muhun.kim/dev'
+        : 'https://meals-data.muhun.kim'
 
 const Chrome = [
     'img/icons/android-chrome-192x192.png',
