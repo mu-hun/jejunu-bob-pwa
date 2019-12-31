@@ -9,7 +9,7 @@ import { TodayOfWeek, Wrapper } from './components/MUI'
 import List from './components/List'
 import AppBar from './components/BottomNav'
 
-import { Weekend, Waiting, NoInternet } from './components/Status'
+import { Weekend, Waiting, NoInternet } from './components/Icons'
 
 import { State } from './@types'
 
