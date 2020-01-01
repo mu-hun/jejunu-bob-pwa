@@ -41,7 +41,8 @@ export const PanelByTime = ({ time }: { time: string }) => (
 )
 
 export const Ul = styled(List)({
-  marginBottom: '2rem'
+  marginBottom: '2rem',
+  paddingBottom: 0
 })
 
 export const TodayOfWeek = ({ weekday }: { weekday: WeekStr }) => (
