@@ -30,7 +30,7 @@ const checkAgent = (name) => navigator.userAgent.indexOf(name) !== -1;
 if (checkAgent('Chrome/')) CacaheByAgent.push(...Chrome);
 else if (!checkAgent('Firefox/')) CacaheByAgent.push(...Safari);
 
-const fileToCache = [...staticFiles, ...CacaheByAgent, ...staticFiles];
+const fileToCache = [...staticFiles, ...CacaheByAgent];
 
 self.addEventListener('install', (evt) => {
   evt.waitUntil(
