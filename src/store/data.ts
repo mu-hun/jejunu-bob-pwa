@@ -1,12 +1,16 @@
-import { createAction, createReducer, PayloadAction } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 import { DayofMenu } from '../@types'
 
-export const setData = createAction<DayofMenu, 'menu'>('menu')
-
-// @ts-ignore
-const initialState: DayofMenu = {}
-
-export default createReducer(initialState, {
-  [setData.type]: (state, action: PayloadAction<DayofMenu>) => action.payload
+const slice = createSlice({
+  name: 'data',
+  // @ts-ignore
+  initialState: {} as DayofMenu,
+  reducers: {
+    setData: (state, action: PayloadAction<DayofMenu>) => action.payload
+  }
 })
+
+export default slice.reducer
+
+export const { setData } = slice.actions
