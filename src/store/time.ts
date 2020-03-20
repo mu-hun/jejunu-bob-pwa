@@ -1,12 +1,16 @@
-import { createAction, createReducer, PayloadAction } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 import { getTime } from '../api'
 import { DayofTime } from '../@types'
 
-export const chooseTime = createAction<DayofTime, 'setTime'>('setTime')
-
-const { dayofTime } = getTime()
-
-export default createReducer(dayofTime, {
-  [chooseTime.type]: (state, action: PayloadAction<DayofTime>) => action.payload
+const slice = createSlice({
+  name: 'time',
+  initialState: getTime().dayofTime,
+  reducers: {
+    chooseTime: (state, action: PayloadAction<DayofTime>) => action.payload
+  }
 })
+
+export default slice.reducer
+
+export const { chooseTime } = slice.actions

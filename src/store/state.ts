@@ -1,10 +1,16 @@
-import { createAction, createReducer } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 import { getState } from '../api'
 import { State } from '../@types'
 
-export const setState = createAction<undefined, 'state'>('state')
-
-export default createReducer(State.isLoading, {
-  [setState.type]: _ => getState()
+const slice = createSlice({
+  name: 'state',
+  initialState: State.isLoading,
+  reducers: {
+    setState: () => getState()
+  }
 })
+
+export default slice.reducer
+
+export const { setState } = slice.actions
