@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect } from 'react'
 
 import { RootState } from './store'
-import { setStatus } from './store/state'
-import { setData } from './store/data'
+import { setStatus, setData } from './store/slice'
 
 import { CssBaseline } from '@material-ui/core'
 import { TodayOfWeek, Wrapper } from './components/MUI'

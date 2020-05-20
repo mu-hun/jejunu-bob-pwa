@@ -1,14 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
-import data from './data'
-import state from './state'
-import time from './time'
-
-const reducer = combineReducers({
-  data,
-  state,
-  time
-})
+import reducer from './slice'
 
 export type RootState = ReturnType<typeof reducer>
 
