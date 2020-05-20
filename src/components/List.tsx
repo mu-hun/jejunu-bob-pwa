@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 
 import { useDispatch } from 'react-redux'
-import { chooseTime } from '../store/time'
+import { chooseTime } from '../store/slice'
 
 import { PanelByTime, Ul } from './MUI'
 import Menu from './Menu'

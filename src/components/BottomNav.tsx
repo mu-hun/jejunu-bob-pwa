@@ -11,7 +11,7 @@ import { BottomNav, Info } from './MUI'
 
 import { DayofTime } from '../@types'
 import { useDispatch } from 'react-redux'
-import { chooseTime } from '../store/time'
+import { chooseTime } from '../store/slice'
 
 export default ({ target }: { target: DayofTime }) => {
   const dispatch = useDispatch()
