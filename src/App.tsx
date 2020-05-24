@@ -17,10 +17,10 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { fetchData, getTime } from './api'
 
-const selector = ({ status, data, time }: RootState) => ({ status, data, time })
+const statusSelector = ({ status }: RootState) => ({ status })
 
 export default () => {
-  const { status } = useSelector(selector)
+  const { status } = useSelector(statusSelector)
 
   const dispatch = useDispatch()
 
@@ -42,8 +42,10 @@ export default () => {
   }
 }
 
+const dataAndTimeSelector = ({ data, time }: RootState) => ({ data, time })
+
 const View = () => {
-  const { data, time } = useSelector(selector)
+  const { data, time } = useSelector(dataAndTimeSelector)
 
   const dispatch = useDispatch()
 
