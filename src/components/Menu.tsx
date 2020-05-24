@@ -1,14 +1,15 @@
 import React, { Fragment } from 'react'
 import { Menu } from '../@types'
 
-import { Item, ItemText } from './MUI'
+import { ItemText } from './MUI'
+import { ListItem } from '@material-ui/core'
 
 export default ({ menus }: { menus: Menu }) => (
   <Fragment>
     {Object.entries(menus).map(([type, menu]) => (
-      <Item key={type} button>
+      <ListItem style={{ padding: '4px 1rem' }} key={type} button>
         <ItemText menu={menu} type={type} />
-      </Item>
+      </ListItem>
     ))}
   </Fragment>
 )
