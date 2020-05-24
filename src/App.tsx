@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react'
 
 import { RootState } from './store'
-import { setState } from './store/state'
+import { setStatus } from './store/state'
 import { setData } from './store/data'
 
 import { CssBaseline } from '@material-ui/core'
@@ -11,31 +11,31 @@ import AppBar from './components/BottomNav'
 
 import { Weekend, Waiting, NoInternet } from './components/Icons'
 
-import { State } from './@types'
+import { Status } from './@types'
 
 import { useSelector, useDispatch } from 'react-redux'
 
 import { fetchData, getTime } from './api'
 
-const selector = ({ state, data, time }: RootState) => ({ state, data, time })
+const selector = ({ status, data, time }: RootState) => ({ status, data, time })
 
 export default () => {
-  const { state } = useSelector(selector)
+  const { status } = useSelector(selector)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(setState())
+    dispatch(setStatus())
   }, [dispatch])
 
-  switch (state) {
-    case State.isLoading:
+  switch (status) {
+    case Status.isLoading:
       return <div>LODING</div>
-    case State.isOK:
+    case Status.isOK:
       return <View />
-    case State.isWeekend:
+    case Status.isWeekend:
       return <Weekend />
-    case State.isWait:
+    case Status.isWait:
       return <Waiting />
     default:
       return <NoInternet />

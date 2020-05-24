@@ -1,14 +1,14 @@
-import { Weekly, State, WeekIndex, Week, WeekStr, DayofTime } from './@types'
+import { Weekly, Status, WeekIndex, Week, WeekStr, DayofTime } from './@types'
 import axios, { AxiosResponse } from 'axios'
 
-export const getState = () => {
+export const getStatus = () => {
   const { weekNum, hour } = getWeekAndHour()
 
-  if (weekNum === -1 || weekNum === 5) return State.isWeekend
+  if (weekNum === -1 || weekNum === 5) return Status.isWeekend
 
-  if (weekNum === 0 && 11 > hour) return State.isWait
+  if (weekNum === 0 && 11 > hour) return Status.isWait
 
-  return State.isOK
+  return Status.isOK
 }
 
 export const getTime = () => {
