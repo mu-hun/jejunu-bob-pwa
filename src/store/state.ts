@@ -1,16 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { getState } from '../api'
-import { State } from '../@types'
+import { getStatus } from '../api'
+import { Status } from '../@types'
 
 const slice = createSlice({
   name: 'state',
-  initialState: State.isLoading,
+  initialState: Status.isLoading,
   reducers: {
-    setState: () => getState()
+    setStatus: () => getStatus()
   }
 })
 
 export default slice.reducer
 
-export const { setState } = slice.actions
+export const { setStatus: setState } = slice.actions

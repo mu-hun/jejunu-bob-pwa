@@ -6,7 +6,7 @@ export type Weekly = {
   4: DayofMenu
 }
 
-export enum State {
+export enum Status {
   'isWeekend',
   'isWait',
   'isLoading',
