@@ -8,7 +8,7 @@ interface State {
   time: DayofTime
   status: Status
   data: DayofMenu
-  error: ''
+  error: string
 }
 
 const dummyData = {
@@ -44,7 +44,7 @@ const slice = createSlice({
     })
     builder.addCase(fetchThunk.rejected, (state, action) => {
       state.status = Status.Error
-      state.error = action.error
+      state.error = action.error.message || 'rejected'
     })
   }
 })
