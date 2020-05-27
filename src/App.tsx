@@ -1,14 +1,13 @@
 import React, { Fragment, useEffect } from 'react'
 
 import { RootState } from './store'
-import { setStatus, setData } from './store/slice'
 
 import { CssBaseline } from '@material-ui/core'
 import { TodayOfWeek, Wrapper } from './components/MUI'
 import List from './components/List'
 import AppBar from './components/BottomNav'
 
-import { Weekend, Waiting, NoInternet, RequestError } from './components/Icons'
+import { Weekend, Waiting, RequestError } from './components/Icons'
 
 import { Status } from './@types'
 
@@ -25,14 +24,14 @@ export default () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(setStatus())
+    dispatch(fetchThunk())
   }, [dispatch])
 
   switch (status) {
-    case Status.IDLE:
-    case Status.Wait:
+    case Status.WaitUntillTenOClock:
       return <Waiting />
     case Status.Loading:
+      return <span>Loading..</span>
     case Status.Loaded:
       return <View />
     case Status.Weekend:
@@ -40,43 +39,30 @@ export default () => {
     case Status.Error:
       return <RequestError />
     default:
-      return <NoInternet />
+      throw Error('unexpect status type branch')
   }
 }
 
 const dataAndTimeSelector = ({ data, time, status }: RootState) => ({
   data,
-  time,
-  status
+  time
 })
 
 const View = () => {
-  const { data, time, status } = useSelector(dataAndTimeSelector)
+  const { data, time } = useSelector(dataAndTimeSelector)
 
   const dispatch = useDispatch()
 
   const { weekStr } = getTime()
 
-  useEffect(() => {
-    dispatch(fetchThunk())
-  }, [dispatch])
-
-  switch (status) {
-    case Status.Loading:
-      // TODO: Replace to Skleton Component
-      return <Waiting />
-    case Status.Loaded:
-      return (
-        <Fragment>
-          <CssBaseline />
-          <Wrapper square>
-            <TodayOfWeek weekday={weekStr} />
-            {<List DayofTime={time} DayofMenu={data} />}
-          </Wrapper>
-          <AppBar target={time} />
-        </Fragment>
-      )
-    default:
-      throw Error('unexpect status branch')
-  }
+  return (
+    <Fragment>
+      <CssBaseline />
+      <Wrapper square>
+        <TodayOfWeek weekday={weekStr} />
+        {<List DayofTime={time} DayofMenu={data} />}
+      </Wrapper>
+      <AppBar target={time} />
+    </Fragment>
+  )
 }

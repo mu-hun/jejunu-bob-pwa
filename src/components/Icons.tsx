@@ -35,13 +35,6 @@ export const Waiting = () => (
   </Div>
 )
 
-export const NoInternet = () => (
-  <Div>
-    <NoInternetIcon style={{ fontSize: '15em' }} />
-    <Label>인터넷 연결이 필요합니다.</Label>
-  </Div>
-)
-
 export const RequestError = () => (
   <Div>
     <ErrorIcon style={{ fontSize: '15em' }} />

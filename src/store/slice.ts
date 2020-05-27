@@ -18,7 +18,7 @@ const dummyData = {
 
 const initialState: State = {
   time: getTime().dayofTime,
-  status: Status.IDLE,
+  status: getStatus(),
   data: dummyData,
   error: ''
 }
@@ -30,11 +30,6 @@ const slice = createSlice({
     chooseTime: (state, action: PayloadAction<DayofTime>) => ({
       ...state,
       time: action.payload
-    }),
-    setStatus: state => ({ ...state, status: getStatus() }),
-    setData: (state, action: PayloadAction<DayofMenu>) => ({
-      ...state,
-      data: action.payload
     })
   },
   extraReducers: builder => {
@@ -51,4 +46,4 @@ const slice = createSlice({
 
 export default slice.reducer
 
-export const { chooseTime, setStatus, setData } = slice.actions
+export const { chooseTime } = slice.actions
