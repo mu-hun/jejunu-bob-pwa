@@ -14,7 +14,8 @@ import { Status } from './@types'
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import { fetchData, getTime } from './api'
+import { getTime } from './api'
+import fetchThunk from './store/thunk'
 
 const statusSelector = ({ status }: RootState) => ({ status })
 
@@ -28,45 +29,52 @@ export default () => {
   }, [dispatch])
 
   switch (status) {
-    case Status.isLoading:
-      return <div>LODING</div>
-    case Status.isOK:
-      return <View />
-    case Status.isWeekend:
-      return <Weekend />
-    case Status.isWait:
+    case Status.IDLE:
+    case Status.Wait:
       return <Waiting />
+    case Status.Loading:
+    case Status.Loaded:
+      return <View />
+    case Status.Weekend:
+      return <Weekend />
     default:
       return <NoInternet />
   }
 }
 
-const dataAndTimeSelector = ({ data, time }: RootState) => ({ data, time })
+const dataAndTimeSelector = ({ data, time, status }: RootState) => ({
+  data,
+  time,
+  status
+})
 
 const View = () => {
-  const { data, time } = useSelector(dataAndTimeSelector)
+  const { data, time, status } = useSelector(dataAndTimeSelector)
 
   const dispatch = useDispatch()
-
-  const fetching = async () => {
-    dispatch(setData(await fetchData()))
-  }
 
   const { weekStr } = getTime()
 
   useEffect(() => {
-    fetching()
-    // eslint-disable-next-line
-  }, [])
+    dispatch(fetchThunk())
+  }, [dispatch])
 
-  return (
-    <Fragment>
-      <CssBaseline />
-      <Wrapper square>
-        <TodayOfWeek weekday={weekStr} />
-        {<List DayofTime={time} DayofMenu={data} />}
-      </Wrapper>
-      <AppBar target={time} />
-    </Fragment>
-  )
+  switch (status) {
+    case Status.Loading:
+      // TODO: Replace to Skleton Component
+      return <Waiting />
+    case Status.Loaded:
+      return (
+        <Fragment>
+          <CssBaseline />
+          <Wrapper square>
+            <TodayOfWeek weekday={weekStr} />
+            {<List DayofTime={time} DayofMenu={data} />}
+          </Wrapper>
+          <AppBar target={time} />
+        </Fragment>
+      )
+    default:
+      throw Error('unexpect status branch')
+  }
 }

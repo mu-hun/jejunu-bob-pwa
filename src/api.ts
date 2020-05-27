@@ -4,11 +4,11 @@ import axios, { AxiosResponse } from 'axios'
 export const getStatus = () => {
   const { weekNum, hour } = getWeekAndHour()
 
-  if (weekNum === -1 || weekNum === 5) return Status.isWeekend
+  if (weekNum === -1 || weekNum === 5) return Status.Weekend
 
-  if (weekNum === 0 && 11 > hour) return Status.isWait
+  if (weekNum === 0 && 11 > hour) return Status.Wait
 
-  return Status.isOK
+  return Status.Loading
 }
 
 export const getTime = () => {
