@@ -8,7 +8,7 @@ import { TodayOfWeek, Wrapper } from './components/MUI'
 import List from './components/List'
 import AppBar from './components/BottomNav'
 
-import { Weekend, Waiting, NoInternet } from './components/Icons'
+import { Weekend, Waiting, NoInternet, RequestError } from './components/Icons'
 
 import { Status } from './@types'
 
@@ -37,6 +37,8 @@ export default () => {
       return <View />
     case Status.Weekend:
       return <Weekend />
+    case Status.error:
+      return <RequestError />
     default:
       return <NoInternet />
   }

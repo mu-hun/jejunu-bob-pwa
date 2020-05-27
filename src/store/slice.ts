@@ -8,6 +8,7 @@ interface State {
   time: DayofTime
   status: Status
   data: DayofMenu
+  error: ''
 }
 
 const dummyData = {
@@ -18,7 +19,8 @@ const dummyData = {
 const initialState: State = {
   time: getTime().dayofTime,
   status: Status.IDLE,
-  data: dummyData
+  data: dummyData,
+  error: ''
 }
 
 const slice = createSlice({
@@ -39,6 +41,10 @@ const slice = createSlice({
     builder.addCase(fetchThunk.fulfilled, (state, action) => {
       state.data = action.payload
       state.status = Status.Loaded
+    })
+    builder.addCase(fetchThunk.rejected, (state, action) => {
+      state.status = Status.Error
+      state.error = action.error
     })
   }
 })
