@@ -23,8 +23,6 @@ export default ({ target }: { target: DayofTime }) => {
       }}
       showLabels
     >
-      {/* (TODO) Wrap with types:
-       https://material-ui.com/guides/d/#with-typescript */}
       <Action label="점심" icon={<LunchIcon />} value={DayofTime['점심']} />
       <Info />
       <Action label="저녁" icon={<DinnerIcon />} value={DayofTime['저녁']} />
