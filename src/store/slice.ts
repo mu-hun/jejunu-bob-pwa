@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 import { getTime, getStatus } from '../api'
 import { DayofTime, Status, DayofMenu } from '../@types'
+import fetchThunk from './thunk'
 
 interface State {
   time: DayofTime
@@ -16,7 +17,7 @@ const dummyData = {
 
 const initialState: State = {
   time: getTime().dayofTime,
-  status: Status.isLoading,
+  status: Status.IDLE,
   data: dummyData
 }
 
@@ -32,6 +33,12 @@ const slice = createSlice({
     setData: (state, action: PayloadAction<DayofMenu>) => ({
       ...state,
       data: action.payload
+    })
+  },
+  extraReducers: builder => {
+    builder.addCase(fetchThunk.fulfilled, (state, action) => {
+      state.data = action.payload
+      state.status = Status.Loaded
     })
   }
 })

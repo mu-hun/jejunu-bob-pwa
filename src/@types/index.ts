@@ -7,10 +7,11 @@ export type Weekly = {
 }
 
 export enum Status {
-  'isWeekend',
-  'isWait',
-  'isLoading',
-  'isOK'
+  'IDLE',
+  'Weekend',
+  'Wait',
+  'Loading',
+  'Loaded'
 }
 
 export enum Week {
