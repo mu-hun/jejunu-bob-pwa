@@ -37,7 +37,7 @@ export default () => {
       return <View />
     case Status.Weekend:
       return <Weekend />
-    case Status.error:
+    case Status.Error:
       return <RequestError />
     default:
       return <NoInternet />
