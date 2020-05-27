@@ -51,7 +51,11 @@ export const TodayOfWeek = ({ weekday }: { weekday: WeekStr }) => (
   </Typography>
 )
 
-export const Wrapper = styled(Paper)({ height: '100%' })
+export const Wrapper = styled(Paper)({
+  height: '100vh',
+  display: 'flex',
+  flexDirection: 'column'
+})
 
 export const BottomNav = styled(BottomNavigation)({
   top: 'auto',
