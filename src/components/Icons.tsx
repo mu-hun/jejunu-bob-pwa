@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import {
   WeekendOutlined as WeekendIcon,
   AccessTime as AccessTimeIcon,
-  SignalCellularConnectedNoInternet0Bar as NoInternetIcon
-} from '@material-ui/icons';
+  SignalCellularConnectedNoInternet0Bar as NoInternetIcon,
+  ErrorOutlineRounded as ErrorIcon
+} from '@material-ui/icons'
 
 export const Div = styled.div`
   width: 100vw;
@@ -38,5 +39,12 @@ export const NoInternet = () => (
   <Div>
     <NoInternetIcon style={{ fontSize: '15em' }} />
     <Label>인터넷 연결이 필요합니다.</Label>
+  </Div>
+);
+
+export const RequestError = () => (
+  <Div>
+    <ErrorIcon style={{ fontSize: '15em' }} />
+    <Label>학식 정보를 가져오는 데에 실패했어요.</Label>
   </Div>
 );

@@ -11,7 +11,8 @@ export enum Status {
   'Weekend',
   'Wait',
   'Loading',
-  'Loaded'
+  'Loaded',
+  'Error'
 }
 
 export enum Week {
