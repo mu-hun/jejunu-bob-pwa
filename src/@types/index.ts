@@ -7,9 +7,8 @@ export type Weekly = {
 }
 
 export enum Status {
-  'IDLE',
   'Weekend',
-  'Wait',
+  'WaitUntillTenOClock',
   'Loading',
   'Loaded',
   'Error'
