@@ -6,6 +6,7 @@ import { CssBaseline } from '@material-ui/core'
 import { TodayOfWeek, Wrapper } from './components/MUI'
 import List from './components/List'
 import AppBar from './components/BottomNav'
+import Skeletons from './components/Skeletons'
 
 import { Weekend, Waiting, RequestError } from './components/Icons'
 
@@ -31,7 +32,7 @@ export default () => {
     case Status.WaitUntillTenOClock:
       return <Waiting />
     case Status.Loading:
-      return <span>Loading..</span>
+      return <Skeletons />
     case Status.Loaded:
       return <View />
     case Status.Weekend:
