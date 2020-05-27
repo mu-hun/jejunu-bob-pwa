@@ -17,10 +17,6 @@ import { ExpandMore, Info as InfoIcon } from '@material-ui/icons'
 
 import { WeekStr } from '../@types'
 
-export const Item = styled(ListItem)({
-  padding: '4px 1rem'
-})
-
 export const ItemText = ({ menu, type }: { menu: string[]; type: string }) => (
   <ListItemText
     style={{ wordBreak: 'keep-all' }}
