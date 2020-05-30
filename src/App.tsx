@@ -25,7 +25,8 @@ export default () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchThunk())
+    if (status !== Status.Weekend && status !== Status.WaitUntillTenOClock)
+      dispatch(fetchThunk())
   }, [dispatch])
 
   switch (status) {
