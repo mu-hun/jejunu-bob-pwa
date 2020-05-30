@@ -33,14 +33,16 @@ const slice = createSlice({
     })
   },
   extraReducers: builder => {
-    builder.addCase(fetchThunk.fulfilled, (state, action) => {
-      state.data = action.payload
-      state.status = Status.Loaded
-    })
-    builder.addCase(fetchThunk.rejected, (state, action) => {
-      state.status = Status.Error
-      state.error = action.error.message || 'rejected'
-    })
+    builder.addCase(fetchThunk.fulfilled, (state, action) => ({
+      ...state,
+      data: action.payload,
+      status: Status.Loaded
+    }))
+    builder.addCase(fetchThunk.rejected, (state, action) => ({
+      ...state,
+      status: Status.Error,
+      error: action.error.message ?? 'rejected'
+    }))
   }
 })
 
