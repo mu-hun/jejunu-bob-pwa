@@ -6,6 +6,8 @@ export type Weekly = {
   4: DayofMenu
 }
 
+export type WeeklyKeys = keyof Weekly
+
 export enum Status {
   'Weekend',
   'WaitUntillTenOClock',
@@ -28,8 +30,6 @@ export enum DayofTime {
 }
 
 export type WeekStr = keyof typeof Week
-
-export type WeekIndex = keyof Weekly
 
 export type DayofMenu = {
   점심: Menu
