@@ -1,23 +1,22 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 import { getTime, getStatus } from '../api'
-import { DayofTime, Status, DayofMenu } from '../@types'
+import { DayofTime, Status, Weekly, WeeklyKeys } from '../@types'
 import fetchThunk from './thunk'
+
+import dummyData from './dummyData.json'
 
 interface State {
   time: DayofTime
+  selectedDay: WeeklyKeys
   status: Status
-  data: DayofMenu
+  data: Weekly
   error: string
-}
-
-const dummyData = {
-  점심: { 정식: ['없음'], 특식: ['없음'], 양식: ['없음'], 중식: ['없음'] },
-  저녁: { 정식: ['없음'], 특식: ['없음'], 양식: ['없음'], 중식: ['없음'] }
 }
 
 const initialState: State = {
   time: getTime().dayofTime,
+  selectedDay: ((new Date().getDay() - 1) % 5) as WeeklyKeys,
   status: getStatus(),
   data: dummyData,
   error: ''

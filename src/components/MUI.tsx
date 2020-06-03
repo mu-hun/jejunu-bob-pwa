@@ -41,7 +41,7 @@ export const Ul = styled(List)({
   paddingBottom: 0
 })
 
-export const TodayOfWeek = ({ weekday }: { weekday: WeekStr }) => (
+export const TodayOfWeek = ({ weekday }: { weekday: string }) => (
   <Typography variant="h5" style={{ padding: '1rem' }} gutterBottom>
     {weekday}
   </Typography>

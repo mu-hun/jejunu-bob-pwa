@@ -10,11 +10,10 @@ import Skeletons from './components/Skeletons'
 
 import { Weekend, Waiting, RequestError } from './components/Icons'
 
-import { Status } from './@types'
+import { Status, Week } from './@types'
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import { getTime } from './api'
 import fetchThunk from './store/thunk'
 
 const statusSelector = ({ status }: RootState) => ({ status })
@@ -45,24 +44,23 @@ export default () => {
   }
 }
 
-const dataAndTimeSelector = ({ data, time, status }: RootState) => ({
+const dataAndTimeSelector = ({ data, time, selectedDay }: RootState) => ({
   data,
-  time
+  time,
+  selectedDay
 })
 
 const View = () => {
-  const { data, time } = useSelector(dataAndTimeSelector)
+  const { data, time, selectedDay } = useSelector(dataAndTimeSelector)
 
   const dispatch = useDispatch()
-
-  const { weekStr } = getTime()
 
   return (
     <Fragment>
       <CssBaseline />
       <Wrapper square>
-        <TodayOfWeek weekday={weekStr} />
-        <List DayofTime={time} DayofMenu={data} />
+        <TodayOfWeek weekday={Week[selectedDay]} />
+        <List DayofTime={time} DayofMenu={data[selectedDay]} />
       </Wrapper>
       <AppBar target={time} />
     </Fragment>
