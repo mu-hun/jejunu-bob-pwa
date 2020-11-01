@@ -34,13 +34,13 @@ const staticFiles = [
   'vendor.js'
 ]
 
-let CacaheByAgent = []
+let cacheByAgent = []
 
-const checkAgent = (name) => navigator.userAgent.indexOf(name) !== -1
-if (checkAgent('Chrome/')) CacaheByAgent.push(...Chrome)
-else if (!checkAgent('Firefox/')) CacaheByAgent.push(...Safari)
+const checkAgent = name => navigator.userAgent.indexOf(name) !== -1
+if (checkAgent('Chrome/')) cacheByAgent.push(...Chrome)
+else if (!checkAgent('Firefox/')) cacheByAgent.push(...Safari)
 
-const fileToCache = [...staticFiles, ...CacaheByAgent]
+const fileToCache = [...staticFiles, ...cacheByAgent]
 
 self.addEventListener('install', evt => {
   evt.waitUntil(
