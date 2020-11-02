@@ -52,7 +52,7 @@ self.addEventListener('install', evt => {
   evt.waitUntil(
     caches
       .open(getCacheVersion())
-      .then(cache => cache.addAll([API_URL]))
+      .then(cache => cache.add(API_URL))
       .catch(evt => console.log(evt))
   )
 })
