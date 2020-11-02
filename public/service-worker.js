@@ -45,16 +45,19 @@ const fileToCache = [...staticFiles, ...cacheByAgent]
 self.addEventListener('install', evt => {
   evt.waitUntil(
     caches
-      .open(CACHE_NAME)
-      .then(cache => cache.addAll(fileToCache))
-      .catch(evt => console.log(evt))
-  )
+	.open(CACHE_NAME)
+	.then(cache => cache.addAll(fileToCache))
+	.catch(evt => console.log(evt))
+	)
+  
   evt.waitUntil(
     caches
       .open(getCacheVersion())
       .then(cache => cache.add(API_URL))
       .catch(evt => console.log(evt))
   )
+  
+  self.skipWaiting()
 })
 
 self.addEventListener('fetch', evt => {
