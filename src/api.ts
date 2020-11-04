@@ -1,4 +1,4 @@
-import { Weekly, Status, WeeklyKeys, Week, WeekStr, DayofTime } from './@types'
+import { Weekly, Status, WeeklyKeys, Week, WeekStr, DayOfTime } from './@types'
 import axios, { AxiosResponse } from 'axios'
 
 export const getStatus = () => {
@@ -15,7 +15,7 @@ export const getTime = () => {
   const { weekNum, hour } = getWeekAndHour()
   return {
     weekStr: Week[weekNum as WeeklyKeys] as WeekStr,
-    dayofTime: hour < 15 ? DayofTime['점심'] : DayofTime['저녁']
+    dayOfTime: hour < 15 ? DayOfTime['점심'] : DayOfTime['저녁']
   }
 }
 

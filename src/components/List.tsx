@@ -8,18 +8,18 @@ import Menu from './Menu'
 
 import { ExpansionPanel } from '@material-ui/core'
 
-import { DayofMenu, DayofTime } from '../@types'
+import { DayOfMenu, DayOfTime } from '../@types'
 
-type Prop = { DayofMenu: DayofMenu; DayofTime: DayofTime }
+type Prop = { dayOfMenu: DayOfMenu; dayOfTime: DayOfTime }
 
-export default ({ DayofMenu, DayofTime }: Prop) => {
+export default ({ dayOfMenu, dayOfTime }: Prop) => {
   const dispatch = useDispatch()
   return (
     <Fragment>
-      {Object.entries(DayofMenu).map(([time, menus], index) => (
+      {Object.entries(dayOfMenu).map(([time, menus], index) => (
         <Ul key={time}>
           <ExpansionPanel
-            expanded={DayofTime === index}
+            expanded={dayOfTime === index}
             onChange={_ => {
               dispatch(chooseTime(index))
             }}

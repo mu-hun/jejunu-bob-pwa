@@ -1,9 +1,9 @@
 export type Weekly = {
-  0: DayofMenu
-  1: DayofMenu
-  2: DayofMenu
-  3: DayofMenu
-  4: DayofMenu
+  0: DayOfMenu
+  1: DayOfMenu
+  2: DayOfMenu
+  3: DayOfMenu
+  4: DayOfMenu
 }
 
 export type WeeklyKeys = keyof Weekly
@@ -24,14 +24,14 @@ export enum Week {
   '금요일'
 }
 
-export enum DayofTime {
+export enum DayOfTime {
   '점심',
   '저녁'
 }
 
 export type WeekStr = keyof typeof Week
 
-export type DayofMenu = {
+export type DayOfMenu = {
   점심: Menu
   저녁: Menu
 }

@@ -1,13 +1,13 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 import { getTime, getStatus } from '../api'
-import { DayofTime, Status, Weekly, WeeklyKeys } from '../@types'
+import { DayOfTime, Status, Weekly, WeeklyKeys } from '../@types'
 import fetchThunk from './thunk'
 
 import dummyData from './dummyData.json'
 
 interface State {
-  time: DayofTime
+  time: DayOfTime
   selectedDay: WeeklyKeys
   status: Status
   data: Weekly
@@ -15,7 +15,7 @@ interface State {
 }
 
 const initialState: State = {
-  time: getTime().dayofTime,
+  time: getTime().dayOfTime,
   selectedDay: ((new Date().getDay() - 1) % 5) as WeeklyKeys,
   status: getStatus(),
   data: dummyData,
@@ -26,7 +26,7 @@ const slice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    chooseTime: (state, action: PayloadAction<DayofTime>) => ({
+    chooseTime: (state, action: PayloadAction<DayOfTime>) => ({
       ...state,
       time: action.payload
     })
