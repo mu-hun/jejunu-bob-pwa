@@ -40,7 +40,7 @@ export default () => {
     case Status.Error:
       return <RequestError />
     default:
-      throw Error('unexpect status type branch')
+      throw Error('unexpected status')
   }
 }
 
