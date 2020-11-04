@@ -44,37 +44,54 @@ const fileToCache = [...staticFiles, ...cacheByAgent]
 
 self.addEventListener('install', evt => {
   evt.waitUntil(
-    caches
-      .open(CACHE_NAME)
-      .then(cache => cache.addAll(fileToCache))
-      .catch(evt => console.log(evt))
-  )
-  evt.waitUntil(
-    caches
-      .open(getCacheVersion())
-      .then(cache => cache.add(API_URL))
-      .catch(evt => console.log(evt))
+    Promise.all([
+      addCache(CACHE_NAME, fileToCache),
+      addCache(getCacheVersion(), API_URL)
+    ])
   )
 })
 
 self.addEventListener('fetch', evt => {
+  if (evt.request.url === API_URL) {
+    const currentAPI = getCacheVersion()
+    const cacheWhitelist = [CACHE_NAME, currentAPI]
+
+    evt.waitUntil(
+      caches.has(currentAPI).then(cache => {
+        if (!cache) {
+          return Promise.all([
+            addCache(currentAPI, API_URL),
+            cleanOldCache(cacheWhitelist)
+          ])
+        }
+      })
+    )
+  }
+
   evt.respondWith(
-    caches
-      .match(evt.request)
-      .then(res => res || fetch(evt.request))
-      .catch(err => console.log(err))
+    caches.match(evt.request).then(res => res || fetch(evt.request))
   )
 })
 
 self.addEventListener('activate', evt => {
   const cacheWhitelist = [CACHE_NAME, getCacheVersion()]
-  evt.waitUntil(
-    caches.keys().then(names =>
-      Promise.all(
-        names.map(name => {
-          if (cacheWhitelist.indexOf(name) === -1) return caches.delete(name)
-        })
-      ).catch(err => console.log(err))
-    )
-  )
+  evt.waitUntil(cleanOldCache(cacheWhitelist))
 })
+
+function addCache(name, URL) {
+  return caches
+    .open(name)
+    .then(cache =>
+      typeof URL === 'string' ? cache.add(URL) : cache.addAll(URL)
+    )
+}
+
+async function cleanOldCache(cacheWhitelist) {
+  const names = await caches.keys()
+
+  return Promise.all(
+    names.map(name => {
+      if (!cacheWhitelist.includes(name)) return caches.delete(name)
+    })
+  )
+}
