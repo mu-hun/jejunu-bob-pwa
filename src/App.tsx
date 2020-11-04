@@ -60,7 +60,7 @@ const View = () => {
       <CssBaseline />
       <Wrapper square>
         <TodayOfWeek weekday={Week[selectedDay]} />
-        <List DayofTime={time} DayofMenu={data[selectedDay]} />
+        <List dayOfTime={time} dayOfMenu={data[selectedDay]} />
       </Wrapper>
       <AppBar target={time} />
     </Fragment>

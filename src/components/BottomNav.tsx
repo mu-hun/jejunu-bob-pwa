@@ -9,11 +9,11 @@ import {
 
 import { BottomNav, Info } from './MUI'
 
-import { DayofTime } from '../@types'
+import { DayOfTime } from '../@types'
 import { useDispatch } from 'react-redux'
 import { chooseTime } from '../store/slice'
 
-export default ({ target }: { target: DayofTime }) => {
+export default ({ target }: { target: DayOfTime }) => {
   const dispatch = useDispatch()
   return (
     <BottomNav
@@ -23,9 +23,9 @@ export default ({ target }: { target: DayofTime }) => {
       }}
       showLabels
     >
-      <Action label="점심" icon={<LunchIcon />} value={DayofTime['점심']} />
+      <Action label="점심" icon={<LunchIcon />} value={DayOfTime['점심']} />
       <Info />
-      <Action label="저녁" icon={<DinnerIcon />} value={DayofTime['저녁']} />
+      <Action label="저녁" icon={<DinnerIcon />} value={DayOfTime['저녁']} />
     </BottomNav>
   )
 }
