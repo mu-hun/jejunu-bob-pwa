@@ -112,11 +112,11 @@ module.exports = {
       disable: !isProduction
     }),
     new CopyWebpackPlugin([
-      // static files to the site root folder (index and robots)
       {
         from: path.join(__dirname, './public'),
         to: outPath,
-        toType: 'dir'
+        toType: 'dir',
+        ignore: ['service-worker.ts']
       }
     ])
   ],

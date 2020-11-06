@@ -1,3 +1,6 @@
+/// <reference path="../src/@types/service-worker" />
+// Hack: Import type for editor
+
 const getCacheVersion = () =>
   `api_${(() => {
     const DATE = new Date()
@@ -36,7 +39,7 @@ const staticFiles = [
 
 let cacheByAgent = []
 
-const checkAgent = name => navigator.userAgent.indexOf(name) !== -1
+const checkAgent = (name: string) => navigator.userAgent.indexOf(name) !== -1
 if (checkAgent('Chrome/')) cacheByAgent.push(...Chrome)
 else if (!checkAgent('Firefox/')) cacheByAgent.push(...Safari)
 
@@ -78,7 +81,7 @@ self.addEventListener('activate', evt => {
   evt.waitUntil(cleanOldCache(cacheWhitelist))
 })
 
-function addCache(name, URL) {
+function addCache(name: string, URL: string | string[]) {
   return caches
     .open(name)
     .then(cache =>
@@ -86,7 +89,7 @@ function addCache(name, URL) {
     )
 }
 
-async function cleanOldCache(cacheWhitelist) {
+async function cleanOldCache(cacheWhitelist: string[]) {
   const names = await caches.keys()
 
   return Promise.all(
