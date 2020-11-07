@@ -4,8 +4,8 @@ const package = require('./package.json')
 
 const isProduction =
   process.argv.indexOf('-p') >= 0 || process.env.NODE_ENV === 'production'
-const sourcePath = path.join(__dirname, './src')
-const outPath = path.join(__dirname, './dist')
+const sourcePath = path.resolve('src')
+const outPath = path.resolve('dist')
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
@@ -112,7 +112,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {
-        from: path.join(__dirname, './public'),
+        from: path.resolve('public'),
         to: outPath,
         toType: 'dir',
         ignore: ['service-worker.ts']
