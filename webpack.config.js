@@ -7,7 +7,6 @@ const isProduction =
 const sourcePath = path.join(__dirname, './src')
 const outPath = path.join(__dirname, './dist')
 
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
