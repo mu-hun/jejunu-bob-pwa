@@ -5,7 +5,12 @@ const getCacheVersion = () =>
   `api_${(() => {
     const DATE = new Date()
     const weekday = Math.floor(DATE.getDate() / 7)
-    return weekday === 1 && DATE.getHours() < 10 ? weekday - 1 : weekday
+    const dayOfWeek = DATE.getDay()
+
+    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6
+    const notYet = dayOfWeek === 1 && DATE.getHours() < 10
+
+    return isWeekend || notYet ? weekday - 1 : weekday
   })()}`
 
 const CACHE_NAME = 'cache_v3'
