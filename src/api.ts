@@ -1,5 +1,5 @@
 import { Weekly, Status, WeeklyKeys, Week, WeekStr, DayOfTime } from './@types'
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 
 export const getStatus = () => {
   const { weekNum, hour } = getWeekAndHour()

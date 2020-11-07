@@ -1,5 +1,4 @@
-/// <reference path="../src/@types/service-worker" />
-// Hack: Import type for editor
+import '../src/@types/service-worker'
 
 const getCacheVersion = () =>
   `api_${(() => {
@@ -37,7 +36,7 @@ const staticFiles = [
   'vendor.js'
 ]
 
-let cacheByAgent = []
+const cacheByAgent: string[] = []
 
 const checkAgent = (name: string) => navigator.userAgent.indexOf(name) !== -1
 if (checkAgent('Chrome/')) cacheByAgent.push(...Chrome)

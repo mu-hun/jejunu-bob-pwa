@@ -22,7 +22,7 @@
  * @license: ISC
  */
 interface ExtendableEvent extends Event {
-  waitUntil(fn: Promise<any>): void
+  waitUntil(fn: Promise<unknown>): void
 }
 
 // Client API
@@ -31,11 +31,11 @@ declare class Client {
   frameType: ClientFrameType
   id: string
   url: string
-  postMessage(message: any): void
+  postMessage(message: unknown): void
 }
 
 interface Clients {
-  claim(): Promise<any>
+  claim(): Promise<unknown>
   get(id: string): Promise<Client>
   matchAll(options?: ClientMatchOptions): Promise<Array<Client>>
 }
@@ -45,16 +45,8 @@ interface ClientMatchOptions {
   type?: ClientMatchTypes
 }
 
-interface WindowClient {
-  focused: boolean
-  visibilityState: WindowClientState
-  focus(): Promise<WindowClient>
-  navigate(url: string): Promise<WindowClient>
-}
-
 type ClientFrameType = 'auxiliary' | 'top-level' | 'nested' | 'none'
 type ClientMatchTypes = 'window' | 'worker' | 'sharedworker' | 'all'
-type WindowClientState = 'hidden' | 'visible' | 'prerender' | 'unloaded'
 
 // Fetch API
 
@@ -68,7 +60,7 @@ interface InstallEvent extends ExtendableEvent {
   activeWorker: ServiceWorker
 }
 
-interface ActivateEvent extends ExtendableEvent {}
+type ActivateEvent = ExtendableEvent
 
 // Notification API
 
@@ -86,7 +78,7 @@ interface PushEvent extends ExtendableEvent {
 interface PushMessageData {
   arrayBuffer(): ArrayBuffer
   blob(): Blob
-  json(): any
+  json(): unknown
   text(): string
 }
 
@@ -98,26 +90,32 @@ interface SyncEvent extends ExtendableEvent {
 }
 
 interface ExtendableMessageEvent extends ExtendableEvent {
-  data: any
-  source: Client | Object
+  data: unknown
+  source: Client | Record<string, unknown>
 }
 
 // ServiceWorkerGlobalScope
 
 interface Window {
-  addEventListener(event: 'activate', fn: (event: ExtendableEvent) => any): void
+  addEventListener(
+    event: 'activate',
+    fn: (event: ExtendableEvent) => unknown
+  ): void
   addEventListener(
     event: 'message',
-    fn: (event?: ExtendableMessageEvent) => any
+    fn: (event?: ExtendableMessageEvent) => unknown
   ): void
-  addEventListener(event: 'fetch', fn: (event: FetchEvent) => any): void
-  addEventListener(event: 'install', fn: (event: ExtendableEvent) => any): void
-  addEventListener(event: 'push', fn: (event: PushEvent) => any): void
+  addEventListener(event: 'fetch', fn: (event: FetchEvent) => unknown): void
+  addEventListener(
+    event: 'install',
+    fn: (event: ExtendableEvent) => unknown
+  ): void
+  addEventListener(event: 'push', fn: (event: PushEvent) => unknown): void
   addEventListener(
     event: 'notificationclick',
-    fn: (event?: NotificationEvent) => any
+    fn: (event?: NotificationEvent) => unknown
   ): void
-  addEventListener(event: 'sync', fn: (event: SyncEvent) => any): void
+  addEventListener(event: 'sync', fn: (event: SyncEvent) => unknown): void
 
   fetch(request: Request | string): Promise<Response>
   skipWaiting(): Promise<void>
