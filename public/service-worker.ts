@@ -1,4 +1,5 @@
-import '../src/@types/service-worker'
+/// <reference path="../src/@types/service-worker" />
+// Hack: Import type for editor
 
 const getCacheVersion = () =>
   `api_${(() => {
