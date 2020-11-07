@@ -1,12 +1,36 @@
 /// <reference path="../src/@types/service-worker" />
 // Hack: Import type for editor
 
-const getCacheVersion = () =>
+const getCacheVersion = (date: Date) =>
   `api_${(() => {
-    const DATE = new Date()
-    const weekday = Math.floor(DATE.getDate() / 7)
-    return weekday === 1 && DATE.getHours() < 10 ? weekday - 1 : weekday
+    const weekday = Math.floor(date.getDate() / 7)
+    const dayOfWeek = date.getDay()
+
+    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6
+    const notYet = dayOfWeek === 1 && date.getHours() < 10
+
+    if (weekday === 0 && (isWeekend || notYet)) return 4
+
+    return isWeekend || notYet ? weekday - 1 : weekday
   })()}`
+
+const cases = [
+  { date: `2020-11-01`, expect: 'api_4' },
+  { date: `2020-11-02T08:00`, expect: 'api_4' },
+  { date: `2020-11-02T10:00`, expect: 'api_0' },
+  { date: `2020-11-07`, expect: 'api_0' },
+  { date: `2020-11-08`, expect: 'api_0' },
+  { date: `2020-11-09T08:00`, expect: 'api_0' },
+  { date: `2020-11-09T10:00`, expect: 'api_1' }
+]
+
+for (const { date, expect } of cases) {
+  const output = getCacheVersion(new Date(date))
+  console.assert(
+    output === expect,
+    `${date} should return ${expect} instead of ${output}.`
+  )
+}
 
 const CACHE_NAME = 'cache_v3'
 
@@ -49,14 +73,14 @@ self.addEventListener('install', evt => {
   evt.waitUntil(
     Promise.all([
       addCache(CACHE_NAME, fileToCache),
-      addCache(getCacheVersion(), API_URL)
+      addCache(getCacheVersion(new Date()), API_URL)
     ])
   )
 })
 
 self.addEventListener('fetch', evt => {
   if (evt.request.url === API_URL) {
-    const currentAPI = getCacheVersion()
+    const currentAPI = getCacheVersion(new Date())
     const cacheWhitelist = [CACHE_NAME, currentAPI]
 
     evt.waitUntil(
@@ -77,7 +101,7 @@ self.addEventListener('fetch', evt => {
 })
 
 self.addEventListener('activate', evt => {
-  const cacheWhitelist = [CACHE_NAME, getCacheVersion()]
+  const cacheWhitelist = [CACHE_NAME, getCacheVersion(new Date())]
   evt.waitUntil(cleanOldCache(cacheWhitelist))
 })
 
