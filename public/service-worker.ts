@@ -9,14 +9,12 @@ const getCacheVersion = (date: Date) =>
     const isWeekend = dayOfWeek === 0 || dayOfWeek === 6
     const notYet = dayOfWeek === 1 && date.getHours() < 10
 
-    if (weekday === 0 && (isWeekend || notYet)) return 4
-
     return isWeekend || notYet ? weekday - 1 : weekday
   })()}`
 
 const cases = [
-  { date: `2020-11-01`, expect: 'api_4' },
-  { date: `2020-11-02T08:00`, expect: 'api_4' },
+  { date: `2020-11-01`, expect: 'api_-1' },
+  { date: `2020-11-02T08:00`, expect: 'api_-1' },
   { date: `2020-11-02T10:00`, expect: 'api_0' },
   { date: `2020-11-07`, expect: 'api_0' },
   { date: `2020-11-08`, expect: 'api_0' },
