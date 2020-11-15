@@ -4,7 +4,6 @@ import { styled } from '@material-ui/core/styles'
 
 import {
   List,
-  ListItem,
   ListItemText,
   ExpansionPanelSummary,
   Typography,
@@ -14,8 +13,6 @@ import {
 } from '@material-ui/core'
 
 import { ExpandMore, Info as InfoIcon } from '@material-ui/icons'
-
-import { WeekStr } from '../@types'
 
 export const ItemText = ({ menu, type }: { menu: string[]; type: string }) => (
   <ListItemText
