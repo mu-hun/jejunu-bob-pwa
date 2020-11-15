@@ -53,8 +53,6 @@ const dataAndTimeSelector = ({ data, time, selectedDay }: RootState) => ({
 const View = () => {
   const { data, time, selectedDay } = useSelector(dataAndTimeSelector)
 
-  const dispatch = useDispatch()
-
   return (
     <Fragment>
       <CssBaseline />
