@@ -10,7 +10,7 @@ export type WeeklyKeys = keyof Weekly
 
 export enum Status {
   'Weekend',
-  'WaitUntillTenOClock',
+  'WaitUntilTenOClock',
   'Loading',
   'Loaded',
   'Error'

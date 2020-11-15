@@ -24,12 +24,12 @@ export default () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (status !== Status.Weekend && status !== Status.WaitUntillTenOClock)
+    if (status !== Status.Weekend && status !== Status.WaitUntilTenOClock)
       dispatch(fetchThunk())
   }, [dispatch])
 
   switch (status) {
-    case Status.WaitUntillTenOClock:
+    case Status.WaitUntilTenOClock:
       return <Waiting />
     case Status.Loading:
       return <Skeletons />

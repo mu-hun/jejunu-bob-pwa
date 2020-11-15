@@ -6,7 +6,7 @@ export const getStatus = () => {
 
   if (weekNum === -1 || weekNum === 5) return Status.Weekend
 
-  if (weekNum === 0 && 11 > hour) return Status.WaitUntillTenOClock
+  if (weekNum === 0 && 11 > hour) return Status.WaitUntilTenOClock
 
   return Status.Loading
 }
