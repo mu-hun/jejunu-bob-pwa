@@ -9,24 +9,24 @@ export type Weekly = {
 export type WeeklyKeys = keyof Weekly
 
 export enum Status {
-  'Weekend',
-  'WaitUntillTenOClock',
-  'Loading',
-  'Loaded',
-  'Error'
+  Weekend,
+  WaitUntilTenOClock,
+  Loading,
+  Loaded,
+  Error
 }
 
 export enum Week {
-  '월요일',
-  '화요일',
-  '수요일',
-  '목요일',
-  '금요일'
+  월요일,
+  화요일,
+  수요일,
+  목요일,
+  금요일
 }
 
 export enum DayOfTime {
-  '점심',
-  '저녁'
+  점심,
+  저녁
 }
 
 export type WeekStr = keyof typeof Week
