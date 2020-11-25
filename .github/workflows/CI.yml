@@ -16,3 +16,5 @@ jobs:
         run: yarn tsc --noEmit && yarn service-worker --noEmit
       - name: Check ESLint Rules
         run: yarn eslint --ext .ts .
+      - name: Check dependency license list sync
+        run: yarn jest
