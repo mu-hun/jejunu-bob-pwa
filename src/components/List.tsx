@@ -20,7 +20,7 @@ export default ({ dayOfMenu, dayOfTime }: Prop) => {
         <Ul key={time}>
           <ExpansionPanel
             expanded={dayOfTime === index}
-            onChange={_ => {
+            onChange={() => {
               dispatch(chooseTime(index))
             }}
             key={time}
