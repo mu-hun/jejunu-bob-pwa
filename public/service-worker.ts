@@ -30,7 +30,7 @@ for (const { date, expect } of cases) {
   )
 }
 
-const CACHE_NAME = 'cache_v3'
+const CACHE_NAME = 'cache_v4'
 
 const API_URL =
   location.hostname === 'localhost'
