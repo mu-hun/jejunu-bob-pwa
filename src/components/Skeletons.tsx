@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 
 import SkeletonOrigin from '@material-ui/lab/Skeleton'
 import { Wrapper } from './MUI'

@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import {
   WeekendOutlined as WeekendIcon,
   AccessTime as AccessTimeIcon,
-  SignalCellularConnectedNoInternet0Bar as NoInternetIcon,
   ErrorOutlineRounded as ErrorIcon
 } from '@material-ui/icons'
 
