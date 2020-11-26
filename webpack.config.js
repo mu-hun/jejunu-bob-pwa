@@ -33,6 +33,7 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
+        exclude: /\.test.tsx?$/,
         use: [
           !isProduction && {
             loader: 'babel-loader',
