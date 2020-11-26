@@ -69,8 +69,9 @@
     "start": "run-s service-worker start:webpack",
     "build:webpack": "webpack -p --progress --colors",
     "build": "run-s service-worker build:webpack",
-    "prettier": "prettier --write \"src/**/*.{ts,tsx,css}\"",
-    "update-license-list": "ts-node src/tools/license/saveList.ts"
+    "used-license:update-list": "ts-node src/tools/license/saveList.ts",
+    "used-license:prettier": "prettier --write ./src/tools/license/list.json",
+    "used-license": "run-s used-license:update-list used-license:prettier"
   },
   "jest": {
     "preset": "ts-jest"
