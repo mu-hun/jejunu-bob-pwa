@@ -19,7 +19,7 @@
     "@types/history": "^4.7.2",
     "@types/jest": "^26.0.15",
     "@types/node": "^10.12.18",
-    "@types/npm-license-crawler": "0.1.0",
+    "@types/npm-license-crawler": "^0.2.0",
     "@types/react": "^16.8.2",
     "@types/react-dom": "^16.8.0",
     "@types/react-redux": "^7.1.5",
