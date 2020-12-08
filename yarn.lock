@@ -954,10 +954,10 @@
   resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.0.tgz#e486d0d97396d79beedd0a6e33f4534ff6b4973e"
   integrity sha512-f5j5b/Gf71L+dbqxIpQ4Z2WlmI/mPJ0fOkGGmFgtb6sAu97EPczzbS3/tJKxmcYDj55OX6ssqwDAWOHIYDRDGA==
 
-"@types/npm-license-crawler@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@types/npm-license-crawler/-/npm-license-crawler-0.1.0.tgz#30136efb9ef9fc180798367e1deb7b31f1f4d736"
-  integrity sha512-RRfJF5c7D39AeSB+sn624ut/Sxa8HYptftIhBEwTpHp9E0BDBOk7a4OyDy6XHK+lA9D8/4U46OdDYhHG3hb5eA==
+"@types/npm-license-crawler@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@types/npm-license-crawler/-/npm-license-crawler-0.2.0.tgz#a45d6edbc17539c356bfd249c91eb98ad476a914"
+  integrity sha512-he/DyNGBXcb8hpsplh2sS0DyFYlmTNs6ckkQGV6K4Py+31u4/2nTh94uYo7JXeFrjcNcdyQZ+HSLXSDjedSsPw==
 
 "@types/prettier@^2.0.0":
   version "2.1.5"

@@ -4,7 +4,6 @@ const options: CrawlerOptions = {
   start: '.',
   onlyDirectDependencies: true,
   omitVersion: true,
-  // @ts-ignore
   noColor: true
 }
 
