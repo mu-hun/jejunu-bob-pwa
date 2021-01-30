@@ -25,7 +25,6 @@
     { "name": "@types/webpack-env", "license": "MIT" },
     { "name": "@typescript-eslint/eslint-plugin", "license": "MIT" },
     { "name": "@typescript-eslint/parser", "license": "BSD-2-Clause" },
-    { "name": "babel-loader", "license": "MIT" },
     { "name": "clean-webpack-plugin", "license": "MIT" },
     { "name": "copy-webpack-plugin", "license": "MIT" },
     { "name": "css-loader", "license": "MIT" },

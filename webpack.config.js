@@ -1,9 +1,9 @@
 const webpack = require('webpack')
 const path = require('path')
-const package = require('./package.json')
 
 const isProduction =
   process.argv.indexOf('-p') >= 0 || process.env.NODE_ENV === 'production'
+
 const sourcePath = path.resolve('src')
 const outPath = path.resolve('dist')
 
@@ -24,25 +24,15 @@ module.exports = {
   target: 'web',
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
-    mainFields: ['module', 'browser', 'main'],
-    alias: {
-      app: path.resolve(__dirname, 'src/app/')
-    }
+    mainFields: ['module', 'browser', 'main']
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         exclude: /\.test.tsx?$/,
-        use: [
-          !isProduction && {
-            loader: 'babel-loader',
-            options: { plugins: ['react-hot-loader/babel'] }
-          },
-          'ts-loader'
-        ].filter(Boolean)
+        use: ['ts-loader']
       },
-      // css
       {
         test: /\.css$/,
         use: [
@@ -57,29 +47,8 @@ module.exports = {
                 ? '[hash:base64:5]'
                 : '[local]__[hash:base64:5]'
             }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins: [
-                require('postcss-import')({ addDependencyTo: webpack }),
-                require('postcss-url')(),
-                require('postcss-preset-env')({
-                  stage: 2
-                }),
-                require('postcss-reporter')(),
-                require('postcss-browser-reporter')({
-                  disabled: isProduction
-                })
-              ]
-            }
           }
         ]
-      },
-      {
-        test: /\.(jpe?g|gif|bmp|mp3|mp4|ogg|wav|eot|ttf|woff|woff2)$/,
-        use: 'file-loader'
       }
     ]
   },
@@ -102,10 +71,6 @@ module.exports = {
     runtimeChunk: true
   },
   plugins: [
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
-      DEBUG: false
-    }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'app.css',
