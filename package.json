@@ -62,7 +62,7 @@
     "service-worker": "tsc public/service-worker.ts --target es2019 --types ./src/@types/service-worker --removeComments",
     "start:webpack": "webpack-dev-server --mode development --hot --progress --color --port 3000 --open",
     "start": "run-s service-worker start:webpack",
-    "build:webpack": "webpack -p --progress --colors",
+    "build:webpack": "webpack --mode production --progress --color",
     "build": "run-s service-worker build:webpack",
     "used-license:update-list": "ts-node src/tools/license/saveList.ts",
     "used-license:prettier": "prettier --write ./src/tools/license/list.json",
