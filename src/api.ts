@@ -24,9 +24,23 @@ const getWeekAndHour = () => {
   return { weekNum: date.getDay() - 1, hour: date.getHours() }
 }
 
-export const fetchData = () =>
-  axios.get<Weekly>(
-    window.location.hostname === 'localhost'
-      ? 'https://meals-data.muhun.kim/dev'
-      : 'https://meals-data.muhun.kim'
-  )
+export const fetchData = () => {
+  const { hostname } = window.location
+
+  const isPreview =
+    hostname.match(/^(deploy-preview-)\d.(--jejunu-bob.netlify.app)$/) !== null
+
+  let URL: string
+
+  if (hostname === 'bob.muhun.kim') {
+    URL = 'https://meals-data.muhun.kim'
+  } else if (isPreview) {
+    URL = 'https://meals-data.muhun.kim/test'
+  } else if (hostname === 'localhost') {
+    URL = 'https://meals-data.muhun.kim/dev'
+  } else {
+    throw Error('This hostname is not allowed.')
+  }
+
+  return axios.get<Weekly>(URL)
+}
