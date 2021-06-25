@@ -77,24 +77,24 @@ self.addEventListener('install', evt => {
 })
 
 self.addEventListener('fetch', evt => {
-  if (evt.request.url === API_URL) {
-    const currentAPI = getCacheVersion(new Date())
-    const cacheWhitelist = [CACHE_NAME, currentAPI]
+  evt.respondWith(
+    (async () => {
+      if (evt.request.url === API_URL) {
+        const currentAPI = getCacheVersion(new Date())
+        const cacheWhitelist = [CACHE_NAME, currentAPI]
 
-    evt.waitUntil(
-      caches.has(currentAPI).then(cache => {
-        if (!cache) {
-          return Promise.all([
+        const isCached = await caches.has(currentAPI)
+        if (!isCached) {
+          await Promise.all([
             addCache(currentAPI, API_URL),
             cleanOldCache(cacheWhitelist)
           ])
         }
-      })
-    )
-  }
+      }
 
-  evt.respondWith(
-    caches.match(evt.request).then(res => res || fetch(evt.request))
+      const res = await caches.match(evt.request)
+      return res || fetch(evt.request)
+    })()
   )
 })
 
